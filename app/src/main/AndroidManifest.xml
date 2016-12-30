@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.radiant.acsl.myworkapp">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- android:theme="@style/Theme.AppCompat" -->
+        <activity android:name=".Activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.NetworkManage" />
+        <activity
+            android:name=".Activity.DeviceInfo"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_device_info"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".Activity.DeviceInfo2" />
+        <activity android:name=".Activity.WifiManage" />
+        <activity android:name=".Activity.TelephoneManage" />
+        <activity android:name=".Activity.BluetoothManage" />
+        <activity android:name=".Activity.AndroidProvider" />
+        <activity
+            android:name=".Activity.PDFViewer"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Activity.PdfRead" />
+        <activity android:name=".Activity.AboutUsActivity" />
+        <activity android:name=".Activity.PrivacyPolicyActivity" />
+        <activity
+            android:name=".Activity.NavFragment"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Activity.RecyclerViewTest" />
+        <activity android:name=".Activity.DialogSample" />
+        <!-- android:theme="@style/Theme.AppCompat.Light.DarkActionBar" -->
+        <activity android:name=".Activity.MatrixDisplay"></activity>
+    </application>
+
+</manifest>

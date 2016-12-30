@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">My Development</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_favorite">Favorite</string>
+    <string-array name="SamplePrj">
+        <item>Android Build</item>
+        <item>Network Manager</item>
+        <item>Telephone Manager</item>
+        <item>Wifi Manager</item>
+        <item>BlueTooth</item>
+        <item>Provider</item>
+        <item>PDF Viewer</item>
+        <item>PDF Reader</item>
+        <item>Navigation Fragment</item>
+        <item>Tab Swibable Fragments</item>
+        <item>Recycler View</item>
+        <item>Dialog</item>
+        <item>Matrix View</item>
+    </string-array>
+
+    <string name="title_activity_device_info">DeviceInfo</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="OpenDrawer">open_Drawer</string>
+    <string name="CloseDrawer">closer_Drawer</string>
+
+    <!-- Navigation Drawer Menus-->
+    <string name="nav_home">Home</string>
+    <string name="nav_photos">Photos</string>
+    <string name="nav_movies">Movies</string>
+    <string name="nav_notification">Notifications</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_aboutus">About Us</string>
+
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_mark_all_read">Mark All as Read</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+    <!--ToolBar Titles When Navigation-->
+    <string-array name="nav_title_menu">
+        <item>Home</item>
+        <item>Photos</item>
+        <item>Movies</item>
+        <item>Settings</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="age">
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
+
+</resources>
