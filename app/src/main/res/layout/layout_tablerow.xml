@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Spinner
+        android:id="@+id/ledgerName"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="6dp"
+        android:layout_weight="1"></Spinner>
+
+    <Switch
+        android:id="@+id/isCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="6dp"
+        android:layout_weight="0"
+        android:showText="false" />
+
+    <EditText
+        android:id="@+id/Amt"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal|right"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:minWidth="30dp" android:maxWidth="40dp"
+        android:text="0" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal|left"
+        android:layout_margin="6dp"
+        android:layout_weight="0"
+        android:minWidth="30dp"
+        android:maxWidth="40dp"/>
+
+    <ImageButton
+        android:id="@+id/delete_row"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="6dp"
+        android:layout_weight="0"
+        android:onClick="onClick"
+        android:background="@color/cardview_light_background"
+        android:src="@drawable/ic_delete_black_24dp" />
+</TableRow>

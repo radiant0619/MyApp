@@ -94,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent12 = new Intent(MainActivity.this, MatrixDisplay.class);
                         startActivity(intent12);
                         break;
+
+                    case "Tally":
+                        Intent intent13 = new Intent(MainActivity.this, AccountHome.class);
+                        startActivity(intent13);
+                        break;
                 }
             }
         });

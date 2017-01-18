@@ -16,8 +16,22 @@
         <item>Recycler View</item>
         <item>Dialog</item>
         <item>Matrix View</item>
+        <item>Tally</item>
     </string-array>
-
+    <string-array name="Type">
+        <item>Payment</item>
+        <item>Receipt</item>
+        <item>Journal</item>
+    </string-array>
+    <string-array name="ledgers">
+        <item >Cash</item>
+        <item >Bank</item>
+        <item >Salary</item>
+        <item >Tax</item>
+        <item >TKNMS</item>
+        <item >Adv to Others</item>
+        <item >Adv from Others</item>
+    </string-array>
     <string name="title_activity_device_info">DeviceInfo</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
