@@ -29,6 +29,7 @@ public class Voucher {
     }
 
     public Voucher() {
+
     }
 
     public int getId() {

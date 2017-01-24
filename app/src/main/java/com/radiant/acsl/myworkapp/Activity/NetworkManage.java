@@ -1,5 +1,6 @@
 package com.radiant.acsl.myworkapp.Activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -23,9 +24,10 @@ public class NetworkManage extends AppCompatActivity {
         setContentView(R.layout.activity_network_manage);
         List<String> list = new ArrayList<String>();
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.INTERNET}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1)
+             ;
         } else {
             ConnectivityManager netManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = netManager.getActiveNetworkInfo();
