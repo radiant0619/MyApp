@@ -1,5 +1,7 @@
 package com.radiant.acsl.myworkapp.Activity;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,8 +10,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -25,10 +29,11 @@ import com.radiant.acsl.myworkapp.Other.PopulateDb;
 import com.radiant.acsl.myworkapp.Other.TallyDb;
 import com.radiant.acsl.myworkapp.R;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 
 /**
  * Created by sakthivel on 05/01/2017.
@@ -37,12 +42,16 @@ public class Accounts extends AppCompatActivity implements View.OnClickListener 
 
     private TableLayout tblLayout;
     private Button btnCheck;
+    Spinner spinVoucher;
     private TextView txtDate;
     private Button btnSubmit;
     private FloatingActionButton fab;
     private ArrayAdapter<CharSequence> adapter;
+    private ArrayAdapter<CharSequence> adapterVch;
     private boolean isChecked;
+    private int year, month, day;
 
+    private Calendar calendar;
     private TallyDb dbTally;
     private PopulateDb populateDb;
 
@@ -56,13 +65,39 @@ public class Accounts extends AppCompatActivity implements View.OnClickListener 
 
         adapter = ArrayAdapter.createFromResource(Accounts.this, R.array.ledgers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adapterVch = ArrayAdapter.createFromResource(Accounts.this, R.array.Type, android.R.layout.simple_spinner_item);
+        adapterVch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         tblLayout = (TableLayout) findViewById(R.id.tbl);
         isChecked = false;
+        spinVoucher = (Spinner) findViewById(R.id.vchType);
+        spinVoucher.setAdapter(adapterVch);
+        spinVoucher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                if (tblLayout.getChildCount() > 1) {
+                    tblLayout.removeViews(1, tblLayout.getChildCount() - 1);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        calendar = Calendar.getInstance(TimeZone.getDefault());
+
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        Log.i("Month   ", String.valueOf(month));
         txtDate = (TextView) findViewById(R.id.dateValue);
+        showdate(year, month + 1, day);
         btnSubmit = (Button) findViewById(R.id.submit);
 
-        txtDate.setText(String.valueOf(DateFormat.getDateInstance().format( new Date())));
+//        txtDate.setText(String.valueOf(DateFormat.getDateInstance().format(new Date())));
         btnCheck = (Button) findViewById(R.id.btnCheck);
         btnSubmit.setEnabled(isChecked);
         btnSubmit.setOnClickListener(this);
@@ -101,6 +136,12 @@ public class Accounts extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
+    }
+
+    private void showdate(int iYear, int iMonth, int iDay) {
+        txtDate.setText(new StringBuilder().append(day).append("-")
+                .append(String.format("%02d", month))
+                .append("-").append(year));
     }
 
     @Override
@@ -162,7 +203,25 @@ public class Accounts extends AppCompatActivity implements View.OnClickListener 
                 isChecked = false;
                 btnSubmit.setEnabled(isChecked);
                 break;
+            case R.id.dateValue:
+                showDialog(999);
+                break;
         }
+    }
+
+    protected Dialog onCreateDialog(int id) {
+        if (id == 999) {
+            return new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int iYear, int iMonth, int iDay) {
+                    year = iYear;
+                    month = iMonth;
+                    day = iDay;
+                    showdate(year, month + 1, day);
+                }
+            }, year, month, day);
+        }
+        return null;
     }
 
     private boolean ValidateRows() {

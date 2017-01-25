@@ -54,7 +54,8 @@
         <activity android:name=".Activity.AccountHome"></activity>
         <activity
             android:name=".Activity.Accounts"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
