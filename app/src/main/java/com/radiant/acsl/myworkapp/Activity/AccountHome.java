@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.util.Xml;
@@ -29,11 +30,16 @@ import com.radiant.acsl.myworkapp.R;
 
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -101,11 +107,18 @@ public class AccountHome extends AppCompatActivity {
 //                }
 
                 XmlSerializer serializer = Xml.newSerializer();
+                FileOutputStream fos = null;
+//                try {
+//                    fos = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/test.xml");
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(fos));
                 StringWriter writer = new StringWriter();
 
                 try {
                     serializer.setOutput(writer);
-                    serializer.startDocument("UTF-8", true);
+                    serializer.startDocument("", true);
 
                     serializer.startTag("", "ENVELOP");
                     serializer.startTag("", "HEADER");
@@ -130,19 +143,24 @@ public class AccountHome extends AppCompatActivity {
 
                     serializer.startTag("", "REQUESTDATA");
 
-                    for (int i = 0; i < mainArrayList.size() - 1; i++) {
+                    for (int i = 0; i <= mainArrayList.size() - 1; i++) {
 
                         VoucherMain main = (VoucherMain) mainArrayList.get(i);
 
                         serializer.startTag("", "TALLYMESSAGE");
                         serializer.startTag("", "VOUCHER");
+                        serializer.attribute("", "VCHTYPE", main.getVoucherType());
 
+                        serializer.attribute("", "ACTION", "Create");
+                        Date postDate = new Date(main.getPostDate());
+                        SimpleDateFormat spl = new SimpleDateFormat("yyyyMMdd");
+                        String sDate = spl.format(postDate);
                         serializer.startTag("", "DATE");
-                        serializer.text(main.getPostDate());
+                        serializer.text(sDate);
                         serializer.endTag("", "DATE");
 
                         serializer.startTag("", "NARRATION");
-                        serializer.text(main.getNarration());
+                        serializer.text(TextUtils.isEmpty(main.getNarration()) ? "" : main.getNarration());
                         serializer.endTag("", "NARRATION");
 
                         serializer.startTag("", "VOUCHERTYPENAME");
@@ -153,76 +171,9 @@ public class AccountHome extends AppCompatActivity {
                         serializer.text(String.valueOf(i));
                         serializer.endTag("", "VOUCHERNUMBER");
 
-                        serializer.startTag("", "PARTYLEDGERNAME");
-                        serializer.text(Constants.NO);
-                        serializer.endTag("", "PARTYLEDGERNAME");
-
-                        serializer.startTag("", "CSTFORMISSUETYPE");
-                        serializer.endTag("", "CSTFORMISSUETYPE");
-
-                        serializer.startTag("", "CSTFORMRECVTYPE");
-                        serializer.endTag("", "CSTFORMRECVTYPE");
-
-                        serializer.startTag("", "FBTPAYMENTTYPE");
-                        serializer.text("Default");
-                        serializer.endTag("", "FBTPAYMENTTYPE");
-
-                        serializer.startTag("", "DIFFACTUALQTY");
-                        serializer.endTag("", "DIFFACTUALQTY");
-
-                        serializer.startTag("", "AUDITED");
-                        serializer.endTag("", "AUDITED");
-
-                        serializer.startTag("", "FORJOBCOSTING");
-                        serializer.text("");
-                        serializer.endTag("", "FORJOBCOSTING");
-
-                        serializer.startTag("", "ISOPTIONAL");
-                        serializer.endTag("", "ISOPTIONAL");
-
                         serializer.startTag("", "EFFECTIVEDATE");
-                        serializer.text(main.getPostDate());
+                        serializer.text(sDate);
                         serializer.endTag("", "EFFECTIVEDATE");
-
-                        serializer.startTag("", "USEFORINTEREST");
-                        serializer.text("");
-                        serializer.endTag("", "USEFORINTEREST");
-
-                        serializer.startTag("", "USEFORGAINLOSS");
-                        serializer.text("");
-                        serializer.endTag("", "USEFORGAINLOSS");
-
-                        serializer.startTag("", "USEFORGODOWNTRANSFER");
-                        serializer.text("");
-                        serializer.endTag("", "USEFORGODOWNTRANSFER");
-
-                        serializer.startTag("", "USEFORCOMPOUND");
-                        serializer.text("");
-                        serializer.endTag("", "USEFORCOMPOUND");
-
-                        serializer.startTag("", "EXCISEOPENING");
-                        serializer.text("");
-                        serializer.endTag("", "EXCISEOPENING");
-
-                        serializer.startTag("", "ISCANCELLED");
-                        serializer.text("");
-                        serializer.endTag("", "ISCANCELLED");
-
-                        serializer.startTag("", "HASCASHFLOW");
-                        serializer.text("");
-                        serializer.endTag("", "HASCASHFLOW");
-
-                        serializer.startTag("", "ISPOSTDATED");
-                        serializer.text(Constants.NO);
-                        serializer.endTag("", "ISPOSTDATED");
-
-                        serializer.startTag("", "USETRACKINGNUMBER");
-                        serializer.text("");
-                        serializer.endTag("", "USETRACKINGNUMBER");
-
-                        serializer.startTag("", "ISINVOICE");
-                        serializer.text("");
-                        serializer.endTag("", "ISINVOICE");
 
                         ArrayList<Voucher> vouchers = DbAdapter.getInstance().getVoucher(tallyDb, main.getId());
 
@@ -234,10 +185,6 @@ public class AccountHome extends AppCompatActivity {
                             serializer.text(vch.getLedgerName());
                             serializer.endTag("", "LEDGERNAME");
 
-                            serializer.startTag("", "GSTCLASS");
-                            serializer.text(Constants.NO);
-                            serializer.endTag("", "GSTCLASS");
-
                             serializer.startTag("", "ISDEEMEDPOSITIVE");
                             serializer.text(Constants.NO);
                             serializer.endTag("", "ISDEEMEDPOSITIVE");
@@ -246,22 +193,27 @@ public class AccountHome extends AppCompatActivity {
                             serializer.text(Constants.NO);
                             serializer.endTag("", "LEDGERFROMITEM");
 
-                            serializer.startTag("", "REMOVEZEROENTRIES");
-                            serializer.text(Constants.NO);
-                            serializer.endTag("", "REMOVEZEROENTRIES");
-
-                            serializer.startTag("", "ISPARTYLEDGER");
-                            serializer.text(Constants.NO);
-                            serializer.endTag("", "ISPARTYLEDGER");
-
                             serializer.startTag("", "AMOUNT");
                             serializer.text(String.valueOf(vch.getDblAmount()));
                             serializer.endTag("", "AMOUNT");
 
-                            serializer.startTag("", "USETRACKINGNUMBER");
-                            serializer.text("");
-                            serializer.endTag("", "USETRACKINGNUMBER");
+                            if (vch.getRef() != null && vch.getRef() != "") {
+                                serializer.startTag("", "BILLALLOCATIONS.LIST");
+                                serializer.startTag("", "NAME");
+                                serializer.text(String.valueOf(vch.getRef()));
+                                serializer.endTag("", "NAME");
 
+                                serializer.startTag("", "BILLTYPE");
+                                serializer.text("New Ref");
+                                serializer.endTag("", "BILLTYPE");
+
+                                serializer.startTag("", "AMOUNT");
+                                serializer.text(String.valueOf(vch.getDblAmount()));
+                                serializer.endTag("", "AMOUNT");
+
+                                serializer.endTag("", "BILLALLOCATIONS.LIST");
+
+                            }
                             serializer.endTag("", "ALLLEDGERENTRIES.LIST");
                         }
                         serializer.endTag("", "VOUCHER");
@@ -269,29 +221,27 @@ public class AccountHome extends AppCompatActivity {
 
                     }
 
-
-//                    serializer.endTag("","BODY");
-//                    serializer.endTag("","BODY");
-
                     serializer.endTag("", "REQUESTDATA");
                     serializer.endTag("", "IMPORTDATA");
                     serializer.endTag("", "BODY");
                     serializer.endTag("", "ENVELOP");
-                    serializer
+                    serializer.endDocument();
+                    serializer.flush();
 
                 } catch (IOException e) {
+
                     e.printStackTrace();
                 }
 
-                Log.i("String Writer", writer.toString());
+//                Log.i("String Writer", writer.toString());
                 if (ActivityCompat.checkSelfPermission(AccountHome.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(AccountHome.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 } else {
                     try {
-                        FileOutputStream fos = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/test.xml");
+                        fos = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/test.xml");
 //                    FileOutputStream fos=getApplicationContext().openFileOutput("test.xml", Context.MODE_PRIVATE);
-                        Log.i("String Writer", writer.toString());
+//                        Log.i("String Writer", writer.toString());
                         fos.write(writer.toString().getBytes());
                         fos.close();
                     } catch (IOException e) {
@@ -303,4 +253,6 @@ public class AccountHome extends AppCompatActivity {
 
         });
     }
+
 }
+
