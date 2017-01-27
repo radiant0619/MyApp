@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.radiant.acsl.myworkapp.Modals.Ledger;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 import com.radiant.acsl.myworkapp.R;
@@ -21,14 +22,14 @@ import java.util.ArrayList;
  * Created by sakthivel on 23/01/2017.
  */
 
-public class VoucherListAdapter1<T> extends BaseAdapter {
+public class VouchersAdapter<T> extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
     ArrayList<T> mList;
     SparseBooleanArray sparseBooleanArray;
 
 
-    public VoucherListAdapter1(Context ctx, ArrayList<T> list) {
+    public VouchersAdapter(Context ctx, ArrayList<T> list) {
 
         this.context = ctx;
         mList = new ArrayList<T>();
@@ -55,7 +56,7 @@ public class VoucherListAdapter1<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertedView, ViewGroup viewGroup) {
-
+        Log.i("Loop Sl ", String.valueOf(position));
         if (convertedView == null) {
 //            Log.i("Is convertedView null","Yes");
             convertedView = inflater.inflate(R.layout.list_multipletext, null);
@@ -67,6 +68,7 @@ public class VoucherListAdapter1<T> extends BaseAdapter {
         TextView txtDate = (TextView) convertedView.findViewById(R.id.PostDate);
         TextView txtEsported = (TextView) convertedView.findViewById(R.id.isExport);
         TextView txtNarrate = (TextView) convertedView.findViewById(R.id.narration);
+        CheckBox chkBox = (CheckBox) convertedView.findViewById(R.id.chkSelect);
         boolean iFlag = false;
         if (getItem(position) instanceof VoucherMain) {
 //            Log.i("Is Voucher Main","Yes");
@@ -77,18 +79,27 @@ public class VoucherListAdapter1<T> extends BaseAdapter {
             txtEsported.setText(String.valueOf(voucher.getisExported()).toUpperCase());
             txtNarrate.setText(String.valueOf(voucher.getNarration()).toUpperCase());
             iFlag = voucher.getisExported();
+            chkBox.setEnabled(!iFlag);
+            chkBox.setTag(position);
+            chkBox.setChecked(sparseBooleanArray.get(position));
+            chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    sparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+                }
+            });
         }
+        if (getItem(position) instanceof Ledger) {
+            chkBox.setVisibility(View.INVISIBLE);
+//            txtId.setVisibility(View.INVISIBLE);
+            txtDate.setVisibility(View.INVISIBLE);
 
-        CheckBox chkBox = (CheckBox) convertedView.findViewById(R.id.chkSelect);
-        chkBox.setEnabled(!iFlag);
-        chkBox.setTag(position);
-        chkBox.setChecked(sparseBooleanArray.get(position));
-        chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                sparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
-            }
-        });
+            Ledger ledger = (Ledger) getItem(position);
+            txtId.setText(String.valueOf(ledger.getId()));
+            txtType.setText(ledger.getAcctName());
+            txtEsported.setText(String.valueOf(ledger.getIsBankCash() == 0 ? false : true).toUpperCase());
+            txtNarrate.setText(String.valueOf(ledger.getIsBillWise() == 0 ? false : true).toUpperCase());
+        }
 
         return convertedView;
     }

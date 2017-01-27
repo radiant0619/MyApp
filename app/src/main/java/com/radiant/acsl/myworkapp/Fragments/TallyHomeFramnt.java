@@ -16,9 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.radiant.acsl.myworkapp.Activity.AccountHome;
 import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter;
-import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter1;
+import com.radiant.acsl.myworkapp.Adapters.VouchersAdapter;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 import com.radiant.acsl.myworkapp.Other.Constants;
@@ -46,7 +45,7 @@ public class TallyHomeFramnt extends Fragment {
 
     private ListView listView;
     private VoucherListAdapter arrayAdapter;
-    private VoucherListAdapter1<VoucherMain> arrayAdapter1;
+    private VouchersAdapter<VoucherMain> arrayAdapter1;
     private ArrayList<VoucherMain> voucherMains;
     private ArrayList<Voucher> voucherArrayList;
     private TallyDb tallyDb;
@@ -67,7 +66,7 @@ public class TallyHomeFramnt extends Fragment {
         listView = (ListView) view.findViewById(R.id.listManager);
         voucherMains = dbAdapter.getInstance().getVoucherList(tallyDb);
         Log.i("Count of voucher", String.valueOf(voucherMains.size()));
-        arrayAdapter1 = new VoucherListAdapter1<VoucherMain>(getActivity(), voucherMains);
+        arrayAdapter1 = new VouchersAdapter<VoucherMain>(getActivity(), voucherMains);
         listView.setAdapter(arrayAdapter1);
         return view;
     }
@@ -213,7 +212,6 @@ public class TallyHomeFramnt extends Fragment {
                 }
                 serializer.endTag("", "VOUCHER");
                 serializer.endTag("", "TALLYMESSAGE");
-
             }
 
             serializer.endTag("", "REQUESTDATA");

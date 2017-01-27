@@ -10,6 +10,7 @@ import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_ID;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_ENTRY;
+import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_LEDGER;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_VOUCHER;
 
 import java.util.ArrayList;
@@ -33,12 +34,11 @@ public class DbAdapter {
 
     public ArrayList<Ledger> getLedgers(TallyDb db) {
         ArrayList<Ledger> ledgers = new ArrayList<Ledger>();
-        String qry = "SELECT * FROM " + TBL_VOUCHER;
+        String qry = "SELECT * FROM " + TBL_LEDGER;
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(qry, null);
 
         if (cursor.moveToFirst()) {
-
             do {
                 Ledger ledger = new Ledger();
                 ledger.setId(cursor.getInt(0));
@@ -46,10 +46,10 @@ public class DbAdapter {
                 ledger.setAcctShort(cursor.getString(0));
                 ledger.setBillWise(cursor.getInt(0));
                 ledger.setIsBankCash(cursor.getInt(0));
-
+                ledgers.add(ledger);
             } while (cursor.moveToNext());
         }
-
+        Log.i("Count of Ledgers", String.valueOf(ledgers.size()));
         return ledgers;
     }
 

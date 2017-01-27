@@ -47,7 +47,7 @@ public class PopulateDb {
 
         SQLiteDatabase dbObj = db.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(FLD_ID, ledger.getId());
+//        values.put(FLD_ID, ledger.getId());
         values.put(FLD_LEDGER_NAME, ledger.getAcctName());
         values.put(FLD_LEDGER_SHORT, ledger.getAcctShort());
         values.put(FLD_LEDGER_BILL, ledger.getIsBankCash());
@@ -120,4 +120,5 @@ public class PopulateDb {
 
         return true;
     }
+
 }

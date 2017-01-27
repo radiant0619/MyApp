@@ -1,7 +1,6 @@
 package com.radiant.acsl.myworkapp.Activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,16 +10,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.util.Xml;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.itextpdf.awt.geom.CubicCurve2D;
 import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter;
-import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter1;
+import com.radiant.acsl.myworkapp.Adapters.VouchersAdapter;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 import com.radiant.acsl.myworkapp.Other.Constants;
@@ -31,19 +27,14 @@ import com.radiant.acsl.myworkapp.R;
 
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by sakthivel on 11/01/2017.
@@ -54,7 +45,7 @@ public class AccountHome extends AppCompatActivity {
     private FloatingActionButton fab;
     private ListView listView;
     private VoucherListAdapter arrayAdapter;
-    private VoucherListAdapter1<VoucherMain> arrayAdapter1;
+    private VouchersAdapter<VoucherMain> arrayAdapter1;
     private ArrayList<VoucherMain> voucherMains;
     private ArrayList<Voucher> voucherArrayList;
     private TallyDb tallyDb;
@@ -79,7 +70,7 @@ public class AccountHome extends AppCompatActivity {
 
 //        Type 2 -
         Log.i("Count of voucher", String.valueOf(voucherMains.size()));
-        arrayAdapter1 = new VoucherListAdapter1<VoucherMain>(this, voucherMains);
+        arrayAdapter1 = new VouchersAdapter<VoucherMain>(this, voucherMains);
         listView.setAdapter(arrayAdapter1);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
