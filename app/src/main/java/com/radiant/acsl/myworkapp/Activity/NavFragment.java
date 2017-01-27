@@ -221,7 +221,7 @@ public class NavFragment extends AppCompatActivity {
 
     }
     private void selectNavMenu() {
-        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+            navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
     private void setNavigationView() {

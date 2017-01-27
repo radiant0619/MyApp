@@ -1,24 +1,22 @@
-package com.radiant.acsl.myworkapp.Activity;
+package com.radiant.acsl.myworkapp.Fragments;
+
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.util.Xml;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.itextpdf.awt.geom.CubicCurve2D;
+import com.radiant.acsl.myworkapp.Activity.AccountHome;
 import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter;
 import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter1;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
@@ -31,69 +29,50 @@ import com.radiant.acsl.myworkapp.R;
 
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
- * Created by sakthivel on 11/01/2017.
+ * A simple {@link Fragment} subclass.
  */
+public class TallyHomeFramnt extends Fragment {
 
-public class AccountHome extends AppCompatActivity {
 
-    private FloatingActionButton fab;
     private ListView listView;
     private VoucherListAdapter arrayAdapter;
     private VoucherListAdapter1<VoucherMain> arrayAdapter1;
     private ArrayList<VoucherMain> voucherMains;
     private ArrayList<Voucher> voucherArrayList;
     private TallyDb tallyDb;
-
     private DbAdapter dbAdapter;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        tallyDb = TallyDb.getInstance(this);
-        listView = (ListView) findViewById(R.id.listManager);
-        voucherMains = dbAdapter.getInstance().getVoucherList(tallyDb);
-
-
-//        Type 1 -
-//        arrayAdapter = new VoucherListAdapter(this, voucherMains);
-//        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-//        listView.setAdapter(arrayAdapter);
-
-
-//        Type 2 -
-        Log.i("Count of voucher", String.valueOf(voucherMains.size()));
-        arrayAdapter1 = new VoucherListAdapter1<VoucherMain>(this, voucherMains);
-        listView.setAdapter(arrayAdapter1);
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(View.VISIBLE);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tallyXmlGenerate();
-            }
-        });
+    public TallyHomeFramnt() {
+        // Required empty public constructor
     }
 
-    public void tallyXmlGenerate() {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_tally_home_framnt, container, false);
+
+        tallyDb = TallyDb.getInstance(getActivity());
+        listView = (ListView) view.findViewById(R.id.listManager);
+        voucherMains = dbAdapter.getInstance().getVoucherList(tallyDb);
+        Log.i("Count of voucher", String.valueOf(voucherMains.size()));
+        arrayAdapter1 = new VoucherListAdapter1<VoucherMain>(getActivity(), voucherMains);
+        listView.setAdapter(arrayAdapter1);
+        return view;
+    }
+
+    private void tallyXmlGenerate() {
         boolean iFlag = false;
         ArrayList<VoucherMain> mainArrayList = arrayAdapter1.getCheckedItems();
         Log.i("Checked Items", "Selected Items count is " + mainArrayList.size());
@@ -250,9 +229,9 @@ public class AccountHome extends AppCompatActivity {
         }
 
 //                Log.i("String Writer", writer.toString());
-        if (ActivityCompat.checkSelfPermission(AccountHome.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(AccountHome.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         } else {
             try {
                 fos = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/test.xml");
@@ -270,7 +249,7 @@ public class AccountHome extends AppCompatActivity {
                     main.setIsExported(true);
                     PopulateDb.updateVoucherStatus(tallyDb, main);
                 }
-                Toast.makeText(getApplicationContext(), "XML File Exported", Toast.LENGTH_LONG);
+                Toast.makeText(getActivity(), "XML File Exported", Toast.LENGTH_LONG);
             }
         }
     }
@@ -318,4 +297,3 @@ public class AccountHome extends AppCompatActivity {
     }
 
 }
-

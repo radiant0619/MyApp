@@ -24,13 +24,13 @@
         <item>Journal</item>
     </string-array>
     <string-array name="ledgers">
-        <item >Cash</item>
-        <item >Bank</item>
-        <item >Salary</item>
-        <item >Tax</item>
-        <item >TKNMS</item>
-        <item >Adv to Others</item>
-        <item >Adv from Others</item>
+        <item>Cash</item>
+        <item>HDFC CREDIT CARD -3912</item>
+        <item>Salary</item>
+        <item>DONATION</item>
+        <item>TKNMS</item>
+        <item>Card Advance</item>
+        <item>HDFC CREDIT CARD -3912</item>
     </string-array>
     <string name="title_activity_device_info">DeviceInfo</string>
     <string name="dummy_button">Dummy Button</string>
@@ -66,7 +66,7 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello Tally Home fragment</string>
 
     <string-array name="age">
         <item>18</item>
@@ -75,5 +75,6 @@
         <item>21</item>
         <item>22</item>
     </string-array>
+    <string name="title_activity_tally_home">TallyHome</string>
 
 </resources>

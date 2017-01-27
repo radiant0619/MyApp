@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class TallyDb extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "tallydb";
-    private static int DATABASE_VERSION = 1;
+    private static int DATABASE_VERSION = 2;
 
     private static TallyDb sInstance;
 
@@ -26,6 +26,7 @@ public class TallyDb extends SQLiteOpenHelper {
     protected static final String FLD_VOUCHER_TYPE = "voucher_type";
     protected static final String FLD_VOUCHER_DATE = "post_date";
     protected static final String FLD_VOUCHER_EXPORT = "is_exported";
+    protected static final String FLD_VOUCHER_REF = "narration";
 
     protected static final String FLD_LEDGER_NAME = "acct_name";
     protected static final String FLD_LEDGER_SHORT = "acct_short";
@@ -33,7 +34,7 @@ public class TallyDb extends SQLiteOpenHelper {
     protected static final String FLD_LEDGER_BILL = "is_billwise";
 
     protected static final String FLD_VOUCHER_LEDGER = "acct_name";
-    protected static final String FLD_VOUCHER_BILL = "bill_ref";
+    protected static final String FLD_VOUCHER_BILL_REF = "bill_ref";
     protected static final String FLD_VOUCHER_CREDIT = "is_credit";
     protected static final String FLD_VOUCHER_AMOUNT = "amount";
 
@@ -44,20 +45,21 @@ public class TallyDb extends SQLiteOpenHelper {
             + FLD_LEDGER_NAME + " TEXT, "
             + FLD_LEDGER_SHORT + " TEXT, "
             + FLD_LEDGER_TYPE + " TEXT, "
-            + FLD_LEDGER_BILL + " INTEFER "
+            + FLD_LEDGER_BILL + " INTEGER "
             + ")";
 
     private static String CREATE_TBL_VOUCHER = "CREATE TABLE " + TBL_VOUCHER + "("
             + FLD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + FLD_VOUCHER_TYPE + " TEXT, "
             + FLD_VOUCHER_DATE + " TEXT, "
-            + FLD_VOUCHER_EXPORT + " INTEFER "
+            + FLD_VOUCHER_EXPORT + " INTEGER, "
+            + FLD_VOUCHER_REF + " TEXT "
             + ")";
 
     private static String CREATE_TBL_ENTRY = "CREATE TABLE " + TBL_ENTRY + "("
             + FLD_ID + " INTEGER , "
             + FLD_VOUCHER_LEDGER + " TEXT, "
-            + FLD_VOUCHER_BILL + " TEXT, "
+            + FLD_VOUCHER_BILL_REF + " TEXT, "
             + FLD_VOUCHER_CREDIT + " INTEGER, "
             + FLD_VOUCHER_AMOUNT + " REAL "
             + ")";
@@ -85,21 +87,31 @@ public class TallyDb extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("DROP TABLE IF EXISTS " + TBL_ENTRY);
-//        db.execSQL("DROP TABLE IF EXISTS " + TBL_LEDGER);
-//        db.execSQL("DROP TABLE IF EXISTS " + TBL_VOUCHER);
-
         db.execSQL(CREATE_TBL_ENTRY);
         db.execSQL(CREATE_TBL_VOUCHER);
         db.execSQL(CREATE_TBL_LEDGER);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion < newVersion) {
+            switch (oldVersion) {
+                case 1:
+                    db.execSQL("alter table " + TBL_VOUCHER + " add coulmn " + FLD_VOUCHER_REF + " text ");
+                    //onCreate(db);
+                    break;
+                case 2:
+//                    db.execSQL("DROP TABLE  IF EXISTS" + TBL_LEDGER);
+//                    db.execSQL("DROP TABLE  IF EXISTS" + TBL_VOUCHER);
+//                    db.execSQL("DROP TABLE  IF EXISTS" + TBL_ENTRY);
+                    //onCreate(db);
+                    break;
+                default:
+                    break;
+            }
+        } else {
 
-        db.execSQL("DROP TABLE  IF EXISTS" + TBL_LEDGER);
-        db.execSQL("DROP TABLE  IF EXISTS" + TBL_VOUCHER);
-        db.execSQL("DROP TABLE  IF EXISTS" + TBL_ENTRY);
-        onCreate(db);
+
+        }
     }
 }

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case "Tally":
-                        Intent intent13 = new Intent(MainActivity.this, Accounts.class);
+                        Intent intent13 = new Intent(MainActivity.this, AccountHome.class);
                         startActivity(intent13);
                         break;
                 }

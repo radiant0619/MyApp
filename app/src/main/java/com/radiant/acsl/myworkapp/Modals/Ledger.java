@@ -9,6 +9,7 @@ public class Ledger {
     private String acctName;
     private String acctShort;
     private int isBankCash;
+    private int isBillWise;
 
     public int getIsBankCash() {
         return isBankCash;
@@ -26,7 +27,7 @@ public class Ledger {
         this.isBillWise = isBillWise;
     }
 
-    private int isBillWise;
+
 
     public Ledger() {
     }

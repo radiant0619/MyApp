@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -21,11 +20,7 @@
 
         <!-- android:theme="@style/Theme.AppCompat" -->
         <activity android:name=".Activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.NetworkManage" />
         <activity
@@ -50,12 +45,22 @@
         <activity android:name=".Activity.RecyclerViewTest" />
         <activity android:name=".Activity.DialogSample" />
         <!-- android:theme="@style/Theme.AppCompat.Light.DarkActionBar" -->
-        <activity android:name=".Activity.MatrixDisplay"></activity>
-        <activity android:name=".Activity.AccountHome"></activity>
+        <activity android:name=".Activity.MatrixDisplay" />
+        <activity android:name=".Activity.AccountHome" />
         <activity
             android:name=".Activity.Accounts"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.TallyHome"
+            android:label="@string/title_activity_tally_home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

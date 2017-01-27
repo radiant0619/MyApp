@@ -31,17 +31,15 @@ public class DbAdapter {
     }
 
 
-    public ArrayList<Ledger> getLedgers(TallyDb db)
-    {
+    public ArrayList<Ledger> getLedgers(TallyDb db) {
         ArrayList<Ledger> ledgers = new ArrayList<Ledger>();
         String qry = "SELECT * FROM " + TBL_VOUCHER;
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(qry,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(qry, null);
 
         if (cursor.moveToFirst()) {
 
             do {
-
                 Ledger ledger = new Ledger();
                 ledger.setId(cursor.getInt(0));
                 ledger.setAcctName(cursor.getString(1));
@@ -71,7 +69,9 @@ public class DbAdapter {
                 vch.setId(cursor.getInt(0));
                 vch.setVoucherType(cursor.getString(1));
                 vch.setPostDate(cursor.getString(2));
-                vch.setIsExported(Boolean.getBoolean(cursor.getString(3)));
+                int i = Integer.parseInt(cursor.getString(3));
+                vch.setIsExported(i == 0 ? false : true);
+                vch.setNarration(cursor.getString(4));
 
                 vouchers.add(vch);
             } while (cursor.moveToNext());
@@ -93,16 +93,18 @@ public class DbAdapter {
 //                Log.i("Value from DB",cursor.getString(1));
                 vch.setLedgerName(cursor.getString(1));
                 vch.setRef(cursor.getString(2));
-                vch.setCredit(Boolean.getBoolean(cursor.getString(3)));
+                int i = Integer.parseInt(cursor.getString(3));
+                vch.setCredit(i == 0 ? false : true);
                 vch.setDblAmount(Double.parseDouble(cursor.getString(4)));
                 vouchers.add(vch);
             } while (cursor.moveToNext());
         }
         return vouchers;
     }
-    public ArrayList<Voucher> getVoucher(TallyDb db,int keyId) {
+
+    public ArrayList<Voucher> getVoucher(TallyDb db, int keyId) {
         ArrayList<Voucher> vouchers = new ArrayList<Voucher>();
-        String qry = "SELECT * FROM " + TBL_ENTRY +" WHERE "+ FLD_ID +"="+ keyId ;
+        String qry = "SELECT * FROM " + TBL_ENTRY + " WHERE " + FLD_ID + "=" + keyId;
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(qry, null);
 
@@ -113,12 +115,13 @@ public class DbAdapter {
 //                Log.i("Value from DB",cursor.getString(1));
                 vch.setLedgerName(cursor.getString(1));
                 vch.setRef(cursor.getString(2));
-                vch.setCredit(Boolean.getBoolean(cursor.getString(3)));
+                int i = Integer.parseInt(cursor.getString(3));
+                vch.setCredit(i == 0 ? false : true);
+                Log.i("Value from DB after", String.valueOf(vch.getIsCredit()));
                 vch.setDblAmount(Double.parseDouble(cursor.getString(4)));
                 vouchers.add(vch);
             } while (cursor.moveToNext());
         }
         return vouchers;
     }
-
 }

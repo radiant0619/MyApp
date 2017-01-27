@@ -66,17 +66,21 @@ public class VoucherListAdapter1<T> extends BaseAdapter {
         TextView txtType = (TextView) convertedView.findViewById(R.id.Type);
         TextView txtDate = (TextView) convertedView.findViewById(R.id.PostDate);
         TextView txtEsported = (TextView) convertedView.findViewById(R.id.isExport);
+        TextView txtNarrate = (TextView) convertedView.findViewById(R.id.narration);
+        boolean iFlag = false;
         if (getItem(position) instanceof VoucherMain) {
 //            Log.i("Is Voucher Main","Yes");
             VoucherMain voucher = (VoucherMain) getItem(position);
             txtId.setText(String.valueOf(voucher.getId()));
             txtType.setText(voucher.getVoucherType());
             txtDate.setText(String.valueOf(voucher.getPostDate()));
-            txtEsported.setText(String.valueOf(voucher.getisExported()));
+            txtEsported.setText(String.valueOf(voucher.getisExported()).toUpperCase());
+            txtNarrate.setText(String.valueOf(voucher.getNarration()).toUpperCase());
+            iFlag = voucher.getisExported();
         }
 
         CheckBox chkBox = (CheckBox) convertedView.findViewById(R.id.chkSelect);
-
+        chkBox.setEnabled(!iFlag);
         chkBox.setTag(position);
         chkBox.setChecked(sparseBooleanArray.get(position));
         chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
