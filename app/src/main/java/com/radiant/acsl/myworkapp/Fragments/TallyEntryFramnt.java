@@ -26,8 +26,11 @@ import android.widget.Toast;
 
 import com.radiant.acsl.myworkapp.Activity.AccountHome;
 import com.radiant.acsl.myworkapp.Activity.Accounts;
+import com.radiant.acsl.myworkapp.Activity.TallyHome;
+import com.radiant.acsl.myworkapp.Modals.Ledger;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
+import com.radiant.acsl.myworkapp.Other.DbAdapter;
 import com.radiant.acsl.myworkapp.Other.PopulateDb;
 import com.radiant.acsl.myworkapp.Other.TallyDb;
 import com.radiant.acsl.myworkapp.R;
@@ -48,6 +51,7 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
     EditText edtNarrate;
     private Button btnSubmit;
     private FloatingActionButton fab;
+    private ArrayAdapter<Ledger>ledgerArrayAdapter;
     private ArrayAdapter<CharSequence> adapter;
     private ArrayAdapter<CharSequence> adapterVch;
     private boolean isChecked;
@@ -69,9 +73,12 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_entry_framnt, container, false);
         dbTally = TallyDb.getInstance(getActivity());
+        ArrayList<Ledger> ledgers = DbAdapter.getInstance().getLedgers(dbTally);
+        ledgerArrayAdapter = new ArrayAdapter<Ledger>(getActivity(), android.R.layout.simple_spinner_item, ledgers);
+//        ledgerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        adapter = ArrayAdapter.createFromResource(getActivity(), R.array.ledgers, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        adapter = ArrayAdapter.createFromResource(getActivity(), R.array.ledgers, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         adapterVch = ArrayAdapter.createFromResource(getActivity(), R.array.Type, android.R.layout.simple_spinner_item);
         adapterVch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,6 +101,13 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
             }
         });
 
+        TallyHome tallyHome = (TallyHome) getActivity();
+        tallyHome.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addRow();
+            }
+        });
         calendar = Calendar.getInstance(TimeZone.getDefault());
 
         year = calendar.get(Calendar.YEAR);
@@ -120,7 +134,7 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         btnSubmit.setEnabled(isChecked);
         TableRow tf = (TableRow) getActivity().getLayoutInflater().inflate(R.layout.layout_tablerow, null);
         Spinner spin = (Spinner) tf.getChildAt(0);
-        spin.setAdapter(adapter);
+        spin.setAdapter(ledgerArrayAdapter);
         tblLayout.addView(tf);
 
     }

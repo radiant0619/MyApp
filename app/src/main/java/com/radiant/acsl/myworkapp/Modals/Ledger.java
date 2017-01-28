@@ -11,23 +11,6 @@ public class Ledger {
     private int isBankCash;
     private int isBillWise;
 
-    public int getIsBankCash() {
-        return isBankCash;
-    }
-
-    public void setIsBankCash(int isBankCash) {
-        this.isBankCash = isBankCash;
-    }
-
-    public int getIsBillWise() {
-        return isBillWise;
-    }
-
-    public void setIsBillWise(int isBillWise) {
-        this.isBillWise = isBillWise;
-    }
-
-
 
     public Ledger() {
     }
@@ -64,16 +47,21 @@ public class Ledger {
         this.acctShort = acctShort;
     }
 
-    public int isBankCash() {
+    public int getIsBankCash() {
         return isBankCash;
     }
 
+    public void setIsBankCash(int isBankCash) {
+        this.isBankCash = isBankCash;
+    }
 
-    public int isBillWise() {
+    public int getIsBillWise() {
         return isBillWise;
     }
 
-    public void setBillWise(int billWise) {
-        isBillWise = billWise;
+    public void setIsBillWise(int isBillWise) {
+        this.isBillWise = isBillWise;
     }
+
+
 }

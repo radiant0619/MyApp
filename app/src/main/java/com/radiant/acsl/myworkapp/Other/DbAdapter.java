@@ -43,13 +43,12 @@ public class DbAdapter {
                 Ledger ledger = new Ledger();
                 ledger.setId(cursor.getInt(0));
                 ledger.setAcctName(cursor.getString(1));
-                ledger.setAcctShort(cursor.getString(0));
-                ledger.setBillWise(cursor.getInt(0));
-                ledger.setIsBankCash(cursor.getInt(0));
+                ledger.setAcctShort(cursor.getString(2));
+                ledger.setIsBankCash(cursor.getInt(3));
+                ledger.setIsBillWise(cursor.getInt(4));
                 ledgers.add(ledger);
             } while (cursor.moveToNext());
         }
-        Log.i("Count of Ledgers", String.valueOf(ledgers.size()));
         return ledgers;
     }
 
@@ -112,7 +111,6 @@ public class DbAdapter {
             do {
                 Voucher vch = new Voucher();
                 vch.setId(cursor.getInt(0));
-//                Log.i("Value from DB",cursor.getString(1));
                 vch.setLedgerName(cursor.getString(1));
                 vch.setRef(cursor.getString(2));
                 int i = Integer.parseInt(cursor.getString(3));

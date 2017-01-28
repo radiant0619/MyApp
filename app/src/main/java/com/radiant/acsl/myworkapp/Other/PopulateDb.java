@@ -47,13 +47,25 @@ public class PopulateDb {
 
         SQLiteDatabase dbObj = db.getWritableDatabase();
         ContentValues values = new ContentValues();
-//        values.put(FLD_ID, ledger.getId());
         values.put(FLD_LEDGER_NAME, ledger.getAcctName());
         values.put(FLD_LEDGER_SHORT, ledger.getAcctShort());
-        values.put(FLD_LEDGER_BILL, ledger.getIsBankCash());
-        values.put(FLD_LEDGER_TYPE, ledger.getIsBillWise());
+        values.put(FLD_LEDGER_BILL, ledger.getIsBillWise());
+        values.put(FLD_LEDGER_TYPE, ledger.getIsBankCash());
 
         dbObj.insertWithOnConflict(TBL_LEDGER, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        return true;
+    }
+
+    public static boolean updateLedger(TallyDb db, Ledger ledger) {
+
+        SQLiteDatabase dbObj = db.getWritableDatabase();
+        int ledgerId = ledger.getId();
+        ContentValues values = new ContentValues();
+        values.put(FLD_LEDGER_NAME, ledger.getAcctName());
+        values.put(FLD_LEDGER_SHORT, ledger.getAcctShort());
+        values.put(FLD_LEDGER_BILL, ledger.getIsBillWise());
+        values.put(FLD_LEDGER_TYPE, ledger.getIsBankCash());
+        dbObj.update(TBL_LEDGER, values, FLD_ID + "=?", new String[]{String.valueOf(ledgerId)});
         return true;
     }
 
@@ -118,6 +130,12 @@ public class PopulateDb {
             dbObj.insertWithOnConflict(TBL_ENTRY, null, values1, SQLiteDatabase.CONFLICT_REPLACE);
         }
 
+        return true;
+    }
+
+    public static boolean Delete(TallyDb db, String table, String column, String value) {
+        SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
+        sqLiteDatabase.delete(table, column + "=?", new String[]{value});
         return true;
     }
 

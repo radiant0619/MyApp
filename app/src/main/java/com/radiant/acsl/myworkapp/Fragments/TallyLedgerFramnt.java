@@ -3,6 +3,7 @@ package com.radiant.acsl.myworkapp.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import com.radiant.acsl.myworkapp.R;
 
 import java.util.ArrayList;
 
+import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_ID;
+import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_LEDGER;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -36,7 +40,9 @@ public class TallyLedgerFramnt extends Fragment {
     private ListView listView;
     private Button btnSave;
     private Button btnCancel;
+    private Button btnDelete;
     private TallyDb tallyDb;
+    private Ledger ledgerEdit;
 
     private VouchersAdapter<Ledger> arrayAdapter1;
     private ArrayList<Ledger> ledgerList;
@@ -52,7 +58,9 @@ public class TallyLedgerFramnt extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_ledger_framnt, container, false);
+
         tallyDb = TallyDb.getInstance(getActivity());
+        ledgerEdit = null;
         edtActName = (EditText) view.findViewById(R.id.acctName);
         edtShortName = (EditText) view.findViewById(R.id.acctShortName);
         aSwitch = (Switch) view.findViewById(R.id.isBankCash);
@@ -64,16 +72,25 @@ public class TallyLedgerFramnt extends Fragment {
             public void onClick(View view) {
                 boolean bFlag = false;
 
-                if (edtActName.getText().toString() == null || edtActName.getText().toString() == "") {
-                    edtActName.setError("Account Name Should not empty");
-                    Toast.makeText(getContext(), "Account Name Should not empty", Toast.LENGTH_LONG);
+                if (edtActName.getText().toString().length() == 0) {
+                    edtActName.setError("Account Name cannot be blank");
+//                    Toast.makeText(getContext(), "Account Name Should not empty", Toast.LENGTH_LONG);
                     return;
                 }
+                if (ledgerEdit == null) {
 //                if (bFlag) {
-                Ledger ledger = new Ledger(0, edtActName.getText().toString(), edtShortName.getText().toString(), aSwitch.isChecked() ? 1 : 0, bSwitch.isChecked() ? 1 : 0);
-                PopulateDb.getInstance().addLedger(tallyDb, ledger);
+                    Ledger ledger = new Ledger(0, edtActName.getText().toString(), edtShortName.getText().toString(), aSwitch.isChecked() ? 1 : 0, bSwitch.isChecked() ? 1 : 0);
+                    PopulateDb.getInstance().addLedger(tallyDb, ledger);
+                } else {
+                    ledgerEdit.setAcctName(edtActName.getText().toString());
+                    ledgerEdit.setAcctShort(edtShortName.getText().toString());
+                    ledgerEdit.setIsBankCash(aSwitch.isChecked() ? 1 : 0);
+                    ledgerEdit.setIsBillWise(bSwitch.isChecked() ? 1 : 0);
+                    PopulateDb.getInstance().updateLedger(tallyDb, ledgerEdit);
+                }
                 ResetControls();
-                LoadListView();
+
+
 //                }
             }
         });
@@ -86,26 +103,28 @@ public class TallyLedgerFramnt extends Fragment {
             }
         });
 
+        btnDelete = (Button) view.findViewById((R.id.btnDelete));
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopulateDb.getInstance().Delete(tallyDb, TBL_LEDGER, FLD_ID, String.valueOf(ledgerEdit.getId()));
+                ResetControls();
+
+            }
+        });
         listView = (ListView) view.findViewById((R.id.listLedger));
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                Ledger led = (Ledger) listView.getAdapter().getItem(position);
-
-                edtActName.setText(led.getAcctName());
-                edtShortName.setText(led.getAcctShort());
-                aSwitch.setChecked(led.getIsBankCash() == 0 ? false : true);
-                bSwitch.setChecked(led.getIsBillWise() == 0 ? false : true);
-
+                ledgerEdit = (Ledger) listView.getAdapter().getItem(position);
+                Log.i("Long Press ", "Called");
+                edtActName.setText(ledgerEdit.getAcctName());
+                edtShortName.setText(ledgerEdit.getAcctShort());
+                aSwitch.setChecked(ledgerEdit.getIsBankCash() == 0 ? false : true);
+                bSwitch.setChecked(ledgerEdit.getIsBillWise() == 0 ? false : true);
+                btnDelete.setEnabled(true);
                 return true;
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
             }
         });
 
@@ -121,10 +140,13 @@ public class TallyLedgerFramnt extends Fragment {
     }
 
     private void ResetControls() {
+        ledgerEdit = null;
+        btnDelete.setEnabled(false);
         edtActName.setText("");
         edtShortName.setText("");
         aSwitch.setChecked(false);
         bSwitch.setChecked(false);
+        LoadListView();
     }
 
 }

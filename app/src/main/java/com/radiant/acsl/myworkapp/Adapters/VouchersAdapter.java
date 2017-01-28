@@ -3,6 +3,7 @@ package com.radiant.acsl.myworkapp.Adapters;
 import android.content.Context;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,11 +59,8 @@ public class VouchersAdapter<T> extends BaseAdapter {
     public View getView(int position, View convertedView, ViewGroup viewGroup) {
         Log.i("Loop Sl ", String.valueOf(position));
         if (convertedView == null) {
-//            Log.i("Is convertedView null","Yes");
             convertedView = inflater.inflate(R.layout.list_multipletext, null);
         }
-
-
         TextView txtId = (TextView) convertedView.findViewById(R.id.slId);
         TextView txtType = (TextView) convertedView.findViewById(R.id.Type);
         TextView txtDate = (TextView) convertedView.findViewById(R.id.PostDate);
@@ -71,7 +69,6 @@ public class VouchersAdapter<T> extends BaseAdapter {
         CheckBox chkBox = (CheckBox) convertedView.findViewById(R.id.chkSelect);
         boolean iFlag = false;
         if (getItem(position) instanceof VoucherMain) {
-//            Log.i("Is Voucher Main","Yes");
             VoucherMain voucher = (VoucherMain) getItem(position);
             txtId.setText(String.valueOf(voucher.getId()));
             txtType.setText(voucher.getVoucherType());
@@ -90,15 +87,18 @@ public class VouchersAdapter<T> extends BaseAdapter {
             });
         }
         if (getItem(position) instanceof Ledger) {
-            chkBox.setVisibility(View.INVISIBLE);
-//            txtId.setVisibility(View.INVISIBLE);
-            txtDate.setVisibility(View.INVISIBLE);
+            chkBox.setVisibility(View.GONE);
+            txtId.setVisibility(View.GONE);
+            txtDate.setVisibility(View.GONE);
 
             Ledger ledger = (Ledger) getItem(position);
             txtId.setText(String.valueOf(ledger.getId()));
             txtType.setText(ledger.getAcctName());
             txtEsported.setText(String.valueOf(ledger.getIsBankCash() == 0 ? false : true).toUpperCase());
             txtNarrate.setText(String.valueOf(ledger.getIsBillWise() == 0 ? false : true).toUpperCase());
+
+            txtType.setWidth(460);
+            txtType.setGravity(Gravity.LEFT);
         }
 
         return convertedView;

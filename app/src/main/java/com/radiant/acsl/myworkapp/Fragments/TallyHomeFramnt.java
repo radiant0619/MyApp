@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.radiant.acsl.myworkapp.Activity.TallyHome;
 import com.radiant.acsl.myworkapp.Adapters.VoucherListAdapter;
 import com.radiant.acsl.myworkapp.Adapters.VouchersAdapter;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
@@ -68,6 +69,14 @@ public class TallyHomeFramnt extends Fragment {
         Log.i("Count of voucher", String.valueOf(voucherMains.size()));
         arrayAdapter1 = new VouchersAdapter<VoucherMain>(getActivity(), voucherMains);
         listView.setAdapter(arrayAdapter1);
+        TallyHome tallyHome = (TallyHome) getActivity();
+        tallyHome.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tallyXmlGenerate();
+            }
+        });
+
         return view;
     }
 

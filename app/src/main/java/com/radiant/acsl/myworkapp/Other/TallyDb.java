@@ -16,9 +16,9 @@ public class TallyDb extends SQLiteOpenHelper {
     private static TallyDb sInstance;
 
     //Tables List
-    protected static final String TBL_VOUCHER = "tbl_voucher";
-    protected static final String TBL_ENTRY = "tbl_entry";
-    protected static final String TBL_LEDGER = "tbl_ledger";
+    public static final String TBL_VOUCHER = "tbl_voucher";
+    public static final String TBL_ENTRY = "tbl_entry";
+    public static final String TBL_LEDGER = "tbl_ledger";
 
     //Table Fields
     public static String FLD_ID = "id";

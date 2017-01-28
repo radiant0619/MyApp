@@ -4,11 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.radiant.acsl.myworkapp.Fragments.TallyHomeFramnt">
 
-    <ListView
-        android:id="@+id/listManager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/colorAccent"
-        android:dividerHeight="1dp"></ListView>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
+        <ListView
+            android:id="@+id/listManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/colorAccent"
+            android:dividerHeight="1dp"></ListView>
+    <!--</ScrollView>-->
 </FrameLayout>

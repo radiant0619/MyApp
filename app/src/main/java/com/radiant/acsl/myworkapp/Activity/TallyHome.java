@@ -27,7 +27,7 @@ public class TallyHome extends AppCompatActivity
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
-    private FloatingActionButton fab;
+    public FloatingActionButton fab;
 
     public static int navItemIndex = 0;
     private Handler mHandler;
@@ -60,6 +60,7 @@ public class TallyHome extends AppCompatActivity
 //CURRENT_TAG = TAG_HOME;
             loadFragment();
         }
+        toggleFab();
     }
 
     @Override
@@ -173,6 +174,9 @@ public class TallyHome extends AppCompatActivity
             case 1:
                 fab.setVisibility(View.INVISIBLE);
                 break;
+            case 2:
+                fab.setImageResource(R.drawable.ic_add_black_24dp);
+                break;
         }
     }
 
@@ -181,14 +185,5 @@ public class TallyHome extends AppCompatActivity
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
 
-        switch (navItemIndex) {
-
-            case 0:
-                //TallyHomeFramnt frg= new TallyHomeFramnt();
-
-//                TallyHomeFramnt frg=(TallyHomeFramnt)getFragmentManager().findFragmentById(R.id.tallyhome);
-
-                break;
-        }
     }
 }
