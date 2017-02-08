@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:layout_weight="0.26"
-                android:onClick="onClick" />
+                android:onClick="showDateDialog" />
 
             <Button
                 android:id="@+id/submit"

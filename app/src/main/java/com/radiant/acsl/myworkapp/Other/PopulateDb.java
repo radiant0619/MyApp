@@ -1,7 +1,6 @@
 package com.radiant.acsl.myworkapp.Other;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_ID;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_LEDGER_BILL;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_LEDGER_NAME;
-import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_LEDGER_SHORT;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_LEDGER_TYPE;
+import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_LEDGER_ISBANK;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_VOUCHER_AMOUNT;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_VOUCHER_BILL_REF;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_VOUCHER_CREDIT;
@@ -48,9 +47,9 @@ public class PopulateDb {
         SQLiteDatabase dbObj = db.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FLD_LEDGER_NAME, ledger.getAcctName());
-        values.put(FLD_LEDGER_SHORT, ledger.getAcctShort());
+        values.put(FLD_LEDGER_TYPE, ledger.getAcctShort());
         values.put(FLD_LEDGER_BILL, ledger.getIsBillWise());
-        values.put(FLD_LEDGER_TYPE, ledger.getIsBankCash());
+        values.put(FLD_LEDGER_ISBANK, ledger.getIsBankCash());
 
         dbObj.insertWithOnConflict(TBL_LEDGER, null, values, SQLiteDatabase.CONFLICT_REPLACE);
         return true;
@@ -62,9 +61,9 @@ public class PopulateDb {
         int ledgerId = ledger.getId();
         ContentValues values = new ContentValues();
         values.put(FLD_LEDGER_NAME, ledger.getAcctName());
-        values.put(FLD_LEDGER_SHORT, ledger.getAcctShort());
+        values.put(FLD_LEDGER_TYPE, ledger.getAcctShort());
         values.put(FLD_LEDGER_BILL, ledger.getIsBillWise());
-        values.put(FLD_LEDGER_TYPE, ledger.getIsBankCash());
+        values.put(FLD_LEDGER_ISBANK, ledger.getIsBankCash());
         dbObj.update(TBL_LEDGER, values, FLD_ID + "=?", new String[]{String.valueOf(ledgerId)});
         return true;
     }
@@ -135,7 +134,9 @@ public class PopulateDb {
 
     public static boolean Delete(TallyDb db, String table, String column, String value) {
         SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
-        sqLiteDatabase.delete(table, column + "=?", new String[]{value});
+//        sqLiteDatabase.delete(table, column + "=?", new String[]{value});
+        sqLiteDatabase.execSQL("DELETE FROM "+ table);
+
         return true;
     }
 

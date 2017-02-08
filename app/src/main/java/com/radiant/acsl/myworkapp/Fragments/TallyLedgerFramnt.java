@@ -22,6 +22,12 @@ import com.radiant.acsl.myworkapp.Other.PopulateDb;
 import com.radiant.acsl.myworkapp.Other.TallyDb;
 import com.radiant.acsl.myworkapp.R;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_ID;
@@ -58,8 +64,16 @@ public class TallyLedgerFramnt extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_ledger_framnt, container, false);
-
         tallyDb = TallyDb.getInstance(getActivity());
+//        try {
+//            PopulateDb.getInstance().Delete(tallyDb, TBL_LEDGER, "0", "");
+//            parseXML();
+//        } catch (XmlPullParserException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         ledgerEdit = null;
         edtActName = (EditText) view.findViewById(R.id.acctName);
         edtShortName = (EditText) view.findViewById(R.id.acctShortName);
@@ -149,4 +163,70 @@ public class TallyLedgerFramnt extends Fragment {
         LoadListView();
     }
 
+    private void parseXML() throws XmlPullParserException, IOException {
+        XmlPullParserFactory pullParserFactory;
+        XmlPullParser parser;
+        ArrayList<Ledger> ledgers = null;
+        try {
+            pullParserFactory = XmlPullParserFactory.newInstance();
+            parser = pullParserFactory.newPullParser();
+
+            InputStream in_s = getContext().getAssets().open("gls.xml");
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(in_s, null);
+
+            int eventType = parser.getEventType();
+            Ledger currentLedger = null;
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                Log.i("xParse", "event " + String.valueOf(eventType));
+                String name = null;
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        Log.i("xParse", "Array Decare");
+                        ledgers = new ArrayList();
+                        break;
+                    case XmlPullParser.START_TAG:
+                        Log.i("xParse", "3");
+                        name = parser.getName().trim();
+                        Log.i("xParse", name);
+                        if (name.equalsIgnoreCase("ledger")) {
+                            currentLedger = new Ledger();
+                            Log.i("xParse", "3a");
+                        } else if (currentLedger != null) {
+                            Log.i("xParse", "3b");
+                            if (name.equalsIgnoreCase("name")) {
+                                currentLedger.setAcctName(parser.nextText());
+                            } else if (name.equalsIgnoreCase("short")) {
+                                currentLedger.setAcctShort(parser.nextText());
+                            } else if (name.equalsIgnoreCase("bank")) {
+                                currentLedger.setIsBankCash(parser.nextText().equalsIgnoreCase("Yes") ? 1 : 0);
+                            } else if (name.equalsIgnoreCase("bill")) {
+                                currentLedger.setIsBillWise(parser.nextText().equalsIgnoreCase("Yes") ? 1 : 0);
+                            }
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        Log.i("xParse", "end Tag");
+                        name = parser.getName();
+                        if (name.equalsIgnoreCase("ledger") && currentLedger != null) {
+                            ledgers.add(currentLedger);
+                        }
+                }
+                eventType = parser.next();
+                Log.i("xParse", "5");
+            }
+
+        } catch (XmlPullParserException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Log.i("Count from XML", String.valueOf(ledgers.size()));
+        for (Ledger led1 : ledgers) {
+            PopulateDb.getInstance().addLedger(tallyDb, led1);
+        }
+    }
 }

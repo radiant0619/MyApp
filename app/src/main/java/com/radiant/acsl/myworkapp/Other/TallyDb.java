@@ -29,8 +29,8 @@ public class TallyDb extends SQLiteOpenHelper {
     protected static final String FLD_VOUCHER_REF = "narration";
 
     protected static final String FLD_LEDGER_NAME = "acct_name";
-    protected static final String FLD_LEDGER_SHORT = "acct_short";
-    protected static final String FLD_LEDGER_TYPE = "is_bank_case";
+    protected static final String FLD_LEDGER_TYPE = "acct_short";
+    protected static final String FLD_LEDGER_ISBANK = "is_bank_case";
     protected static final String FLD_LEDGER_BILL = "is_billwise";
 
     protected static final String FLD_VOUCHER_LEDGER = "acct_name";
@@ -43,8 +43,8 @@ public class TallyDb extends SQLiteOpenHelper {
     private static String CREATE_TBL_LEDGER = "CREATE TABLE " + TBL_LEDGER + "("
             + FLD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + FLD_LEDGER_NAME + " TEXT, "
-            + FLD_LEDGER_SHORT + " TEXT, "
             + FLD_LEDGER_TYPE + " TEXT, "
+            + FLD_LEDGER_ISBANK + " TEXT, "
             + FLD_LEDGER_BILL + " INTEGER "
             + ")";
 

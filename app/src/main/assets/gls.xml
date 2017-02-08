@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ledgers>
+    <ledger>
+        <name>AXIS CREDIT CARD - 4818</name>
+        <short>4818</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Axis RSW 3210</name>
+        <short>3210</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Bajaj Finance</name>
+        <short>Bajaj</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>HDFC CREDIT CARD -0798</name>
+        <short>798</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>HDFC CREDIT CARD -3912</name>
+        <short>3912</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>HDFC CREDIT CARD -9093</name>
+        <short>9093</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Others Card Usage</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>SBI CARD - 7670</name>
+        <short>7670 Rsv</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>SBI CARD - 9687</name>
+        <short>9687 TKNMS</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>SC BANK CARD -7773</name>
+        <short>7773</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Advance Credit Card</name>
+        <short>Card Advance</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADVANCE TO OTHERS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADVANCE TO RAJENDRAN A/C</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADVANCE TO TKNMS</name>
+        <short>KUTTY</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADVANCE TO VIJI</name>
+        <short>TO VIJI</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Kutty Hdfc A/c</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Saraswathi Axis Bank</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>VASU A/C</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Axis Bank - 914010014721301</name>
+        <short>1301</short>
+        <bank>Yes</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>HDFC A/C NO: 12771530006320</name>
+        <short>6320</short>
+        <bank>Yes</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>SBI SB A/C 30243906649</name>
+        <short>6649</short>
+        <bank>Yes</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Cash</name>
+        <bank>Yes</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Fixed Deposit</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Advance to Family</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>CHIT FUND</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>FAMILY LOAN REPAYMENT</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>RECEIVABLE - ACSL</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>RECEIVABLE OTHERS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADV FROM FAMILY</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADV FROM OTHERS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADV FROM SARASWATHI</name>
+        <short>RSW ADVANCE</short>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Adv From TKNMS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADV FROM VIJI</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>EB PAYMENTS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>EXP PAYABLE</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Loans From Bank</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>NARASINGAM</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>RAJA SAMY</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>TOUR COLLECTION</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>REFERRAL</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>SALARY</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>BUILDING COST</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>COMPUTER SYSTEM</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ELECTRONICS ITEMS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>EQUIPMENT</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>FURNITURE</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Gold &amp; Silver</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>HOUSING PLAT</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>OTHERS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Vehicles</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Apple</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Banana</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Carrot</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>CUCUMBER</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Egg</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>FOOD EXP</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Fruits</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Gyava</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Health Exercise Training</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Health Items</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Other Foods</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Pomegranate</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Siruthaniyam</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>SPINACH</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Vegetables</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>2 WHEELER EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>BANK CHARGES</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Breakfast</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Camera Exp</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>CARRIAGE RENT</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>CELLPHONE EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>CLOTH EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>COMPUTER SERVICE</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Computer Spares</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Credit Card Charges</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Dinner</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>DOCUMENT EXPSENS</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>DONATION</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>EB EXP 281</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>EB EXP 349</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>EB EXPEN 039</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>EB EXPENSES 250</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Electrical Exp</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Entertainment</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Exp to Saraswathi</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>FAMILY EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>FEES</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Foot Wear Exp</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Function Gifts</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Gift</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>GREEN FARMING</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Hair Cut Exp</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Home Needs</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Home Needs, Vessals &amp; Others</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>INSURANCE FOR 2 WHEELER</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>INTEREST EXPENSES</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>IRONING CHARGES</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Learning Exp</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>LUNCH EXP</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>MEDICAL EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>MISCHELANEOUS EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>News Paper Exp</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>PARENTS EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>PERSONAL NECESSITY EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>PETROL EXPENSES</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>PHOTOCOPY EXP</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>POOJA EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>POSTAL</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>PRINTING &amp; STATIONARY</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>PROFESSIONAL TAX</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>RATES &amp; TAXES</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>REFRESHMENT EXP</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>REPAIRS &amp; SERVICES</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Round Off</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>RSW EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Service Tax</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>TAX</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>TELEPHONE EXP</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>TOUR EXP</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Travelling Exp</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Credit Card Income</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Gift Received</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>INT INCOME</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>Misc Income</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Offer Income</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>LIC JEEVAN ANAND 746631518</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>LIC JEEVAN SARAL 746631519</name>
+        <bank>No</bank>
+        <bill>No</bill>
+    </ledger>
+    <ledger>
+        <name>ADV FROM KAMATCHI</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>ADV FROM RAJENDRAN</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>Honey Purchases</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+    <ledger>
+        <name>HONEY SALES</name>
+        <bank>No</bank>
+        <bill>Yes</bill>
+    </ledger>
+</ledgers>

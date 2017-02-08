@@ -30,7 +30,7 @@
             android:id="@+id/acctShortName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Short Name" />
+            android:hint="Account Type" />
     </android.support.design.widget.TextInputLayout>
 
     <Switch

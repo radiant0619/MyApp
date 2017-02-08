@@ -9,6 +9,7 @@ import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 
 import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_ID;
+import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_LEDGER_NAME;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_ENTRY;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_LEDGER;
 import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_VOUCHER;
@@ -34,7 +35,7 @@ public class DbAdapter {
 
     public ArrayList<Ledger> getLedgers(TallyDb db) {
         ArrayList<Ledger> ledgers = new ArrayList<Ledger>();
-        String qry = "SELECT * FROM " + TBL_LEDGER;
+        String qry = "SELECT * FROM " + TBL_LEDGER + " ORDER BY " + FLD_LEDGER_NAME;
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(qry, null);
 

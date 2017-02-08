@@ -63,5 +63,8 @@ public class Ledger {
         this.isBillWise = isBillWise;
     }
 
+    public String toString() {
+        return acctName;
+    }
 
 }

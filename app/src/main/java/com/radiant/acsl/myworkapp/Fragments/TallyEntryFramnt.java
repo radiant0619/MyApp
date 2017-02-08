@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.radiant.acsl.myworkapp.Activity.AccountHome;
 import com.radiant.acsl.myworkapp.Activity.Accounts;
 import com.radiant.acsl.myworkapp.Activity.TallyHome;
+import com.radiant.acsl.myworkapp.Adapters.SpinnerAdapter;
 import com.radiant.acsl.myworkapp.Modals.Ledger;
 import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
@@ -51,7 +53,7 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
     EditText edtNarrate;
     private Button btnSubmit;
     private FloatingActionButton fab;
-    private ArrayAdapter<Ledger>ledgerArrayAdapter;
+    private ArrayAdapter<Ledger> ledgerArrayAdapter;
     private ArrayAdapter<CharSequence> adapter;
     private ArrayAdapter<CharSequence> adapterVch;
     private boolean isChecked;
@@ -60,7 +62,7 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
     private Calendar calendar;
     private TallyDb dbTally;
     private PopulateDb populateDb;
-
+    private SpinnerAdapter spinnerAdapter;
 
     public TallyEntryFramnt() {
         // Required empty public constructor
@@ -74,9 +76,12 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_tally_entry_framnt, container, false);
         dbTally = TallyDb.getInstance(getActivity());
         ArrayList<Ledger> ledgers = DbAdapter.getInstance().getLedgers(dbTally);
+        //ArrayAdapter --- Normal
         ledgerArrayAdapter = new ArrayAdapter<Ledger>(getActivity(), android.R.layout.simple_spinner_item, ledgers);
-//        ledgerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        ledgerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //ArrayAdapter --- Custom
+        spinnerAdapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, ledgers);
+        //ArrayAdapter --- From Array Resource
 //        adapter = ArrayAdapter.createFromResource(getActivity(), R.array.ledgers, android.R.layout.simple_spinner_item);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -90,8 +95,21 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         spinVoucher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                if (tblLayout.getChildCount() > 1) {
-                    tblLayout.removeViews(1, tblLayout.getChildCount() - 1);
+                Log.i("Inside ",String.valueOf( tblLayout.getChildCount()));
+                if (tblLayout.getChildCount() > 1 && adapterView.getItemAtPosition(position).toString() == "Journal") {
+                    Log.i("Inside ", "1");
+//                    tblLayout.removeViews(1, tblLayout.getChildCount() - 1);
+                    for (int i = 1, j = tblLayout.getChildCount(); i < j; i++) {
+                        View view1 = tblLayout.getChildAt(i);
+                        if (view instanceof TableRow) {
+                            TableRow row = (TableRow) view1;
+                            Spinner spin = (Spinner) row.getChildAt(0);
+                            Ledger ledger = (Ledger) spin.getSelectedItem();
+                            if (ledger.getIsBankCash() == 1) {
+                                tblLayout.removeView(row);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -115,6 +133,15 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         edtNarrate = (EditText) view.findViewById(R.id.narration);
         txtDate = (TextView) view.findViewById(R.id.dateValue);
+        txtDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dateFragment = new DatePickerFragment();
+//                dateFragment.show(getActivity())
+                getActivity().showDialog(999);
+            }
+        });
+
         showdate(year, month + 1, day);
         btnSubmit = (Button) view.findViewById(R.id.submit);
 
@@ -133,8 +160,35 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         isChecked = false;
         btnSubmit.setEnabled(isChecked);
         TableRow tf = (TableRow) getActivity().getLayoutInflater().inflate(R.layout.layout_tablerow, null);
+        final Switch isCredit = (Switch) tf.getChildAt(1);
+        final EditText edtRef = (EditText) tf.getChildAt(3);
         Spinner spin = (Spinner) tf.getChildAt(0);
         spin.setAdapter(ledgerArrayAdapter);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int poistion, long id) {
+                Ledger ledger = (Ledger) adapterView.getSelectedItem();
+//                Log.i("Item Selected", String.valueOf(ledger.getIsBillWise()));
+
+                edtRef.setEnabled(ledger.getIsBillWise() == 1 ? true : false);
+                if (spinVoucher.getSelectedItem().toString() == "Payment") {
+                    if (ledger.getIsBankCash() == 1) {
+                        isCredit.setChecked(true);
+                        isCredit.setEnabled(false);
+                    }
+                } else if (spinVoucher.getSelectedItem().toString() == "Receipt") {
+                    if (ledger.getIsBankCash() == 1) {
+                        isCredit.setChecked(false);
+                        isCredit.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         tblLayout.addView(tf);
 
     }

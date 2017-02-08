@@ -57,7 +57,7 @@ public class VouchersAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertedView, ViewGroup viewGroup) {
-        Log.i("Loop Sl ", String.valueOf(position));
+//        Log.i("Loop Sl ", String.valueOf(position));
         if (convertedView == null) {
             convertedView = inflater.inflate(R.layout.list_multipletext, null);
         }

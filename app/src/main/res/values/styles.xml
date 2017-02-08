@@ -69,4 +69,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SpinnerText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 </resources>
