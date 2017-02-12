@@ -35,7 +35,7 @@ public class DbAdapter {
 
     public ArrayList<Ledger> getLedgers(TallyDb db) {
         ArrayList<Ledger> ledgers = new ArrayList<Ledger>();
-        String qry = "SELECT * FROM " + TBL_LEDGER + " ORDER BY " + FLD_LEDGER_NAME;
+        String qry = "SELECT * FROM " + TBL_LEDGER + " ORDER BY " + FLD_LEDGER_NAME + " COLLATE NOCASE;";
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(qry, null);
 

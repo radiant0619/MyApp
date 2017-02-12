@@ -1,6 +1,7 @@
 package com.radiant.acsl.myworkapp.Fragments;
 
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -64,6 +65,8 @@ public class TallyLedgerFramnt extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_ledger_framnt, container, false);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
         tallyDb = TallyDb.getInstance(getActivity());
 //        try {
 //            PopulateDb.getInstance().Delete(tallyDb, TBL_LEDGER, "0", "");

@@ -2,6 +2,7 @@ package com.radiant.acsl.myworkapp.Fragments;
 
 
 import android.Manifest;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -62,7 +63,7 @@ public class TallyHomeFramnt extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_home_framnt, container, false);
-
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         tallyDb = TallyDb.getInstance(getActivity());
         listView = (ListView) view.findViewById(R.id.listManager);
         voucherMains = dbAdapter.getInstance().getVoucherList(tallyDb);

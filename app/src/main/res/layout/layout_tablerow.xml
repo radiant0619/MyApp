@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Spinner
+    <!--<Spinner-->
+    <!--android:id="@+id/ledgerName"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_margin="6dp"-->
+    <!--android:layout_weight="1"></Spinner>-->
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/ledgerName"
         android:layout_gravity="center_vertical"
         android:layout_margin="6dp"
-        android:layout_weight="1"></Spinner>
+        android:layout_weight="1" />
 
     <Switch
         android:id="@+id/isCredit"
@@ -24,7 +29,8 @@
         android:layout_margin="6dp"
         android:layout_weight="1"
         android:inputType="numberDecimal"
-        android:minWidth="30dp" android:maxWidth="40dp"
+        android:maxWidth="40dp"
+        android:minWidth="30dp"
         android:text="0" />
 
     <EditText
@@ -33,15 +39,15 @@
         android:layout_gravity="center_horizontal|left"
         android:layout_margin="6dp"
         android:layout_weight="0"
-        android:minWidth="30dp"
-        android:maxWidth="40dp"/>
+        android:maxWidth="40dp"
+        android:minWidth="30dp" />
 
     <ImageButton
         android:id="@+id/delete_row"
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_margin="6dp"
         android:layout_weight="0"
-        android:onClick="onClick"
         android:background="@color/cardview_light_background"
+        android:onClick="onClick"
         android:src="@drawable/ic_delete_black_24dp" />
 </TableRow>

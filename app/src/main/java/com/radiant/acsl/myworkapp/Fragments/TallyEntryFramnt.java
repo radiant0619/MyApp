@@ -4,6 +4,7 @@ package com.radiant.acsl.myworkapp.Fragments;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -36,6 +37,7 @@ import com.radiant.acsl.myworkapp.Other.DbAdapter;
 import com.radiant.acsl.myworkapp.Other.PopulateDb;
 import com.radiant.acsl.myworkapp.Other.TallyDb;
 import com.radiant.acsl.myworkapp.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -74,13 +76,18 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_entry_framnt, container, false);
+
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         dbTally = TallyDb.getInstance(getActivity());
         ArrayList<Ledger> ledgers = DbAdapter.getInstance().getLedgers(dbTally);
+
         //ArrayAdapter --- Normal
         ledgerArrayAdapter = new ArrayAdapter<Ledger>(getActivity(), android.R.layout.simple_spinner_item, ledgers);
         ledgerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         //ArrayAdapter --- Custom
         spinnerAdapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, ledgers);
+
         //ArrayAdapter --- From Array Resource
 //        adapter = ArrayAdapter.createFromResource(getActivity(), R.array.ledgers, android.R.layout.simple_spinner_item);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -95,14 +102,15 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         spinVoucher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Log.i("Inside ",String.valueOf( tblLayout.getChildCount()));
-                if (tblLayout.getChildCount() > 1 && adapterView.getItemAtPosition(position).toString() == "Journal") {
+                Log.i("Inside ", String.valueOf(tblLayout.getChildCount()));
+                if (tblLayout.getChildCount() > 1 && adapterView.getItemAtPosition(position).toString().equals("Journal")) {
                     Log.i("Inside ", "1");
 //                    tblLayout.removeViews(1, tblLayout.getChildCount() - 1);
                     for (int i = 1, j = tblLayout.getChildCount(); i < j; i++) {
-                        View view1 = tblLayout.getChildAt(i);
-                        if (view instanceof TableRow) {
-                            TableRow row = (TableRow) view1;
+                        View viewRow = tblLayout.getChildAt(i);
+
+                        if (viewRow instanceof TableRow) {
+                            TableRow row = (TableRow) viewRow;
                             Spinner spin = (Spinner) row.getChildAt(0);
                             Ledger ledger = (Ledger) spin.getSelectedItem();
                             if (ledger.getIsBankCash() == 1) {
@@ -137,8 +145,7 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 DialogFragment dateFragment = new DatePickerFragment();
-//                dateFragment.show(getActivity())
-                getActivity().showDialog(999);
+                dateFragment.show(getFragmentManager(), "Date Picker");
             }
         });
 
@@ -162,9 +169,9 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         TableRow tf = (TableRow) getActivity().getLayoutInflater().inflate(R.layout.layout_tablerow, null);
         final Switch isCredit = (Switch) tf.getChildAt(1);
         final EditText edtRef = (EditText) tf.getChildAt(3);
-        Spinner spin = (Spinner) tf.getChildAt(0);
-        spin.setAdapter(ledgerArrayAdapter);
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        SearchableSpinner spinnerLedger = (SearchableSpinner) tf.getChildAt(0);
+        spinnerLedger.setAdapter(ledgerArrayAdapter);
+        spinnerLedger.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int poistion, long id) {
                 Ledger ledger = (Ledger) adapterView.getSelectedItem();
@@ -197,7 +204,6 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
         Log.i("date", String.valueOf(iMonth));
         txtDate.setText(new StringBuilder().append(java.lang.String.format("%02d", iDay)).append("-")
                 .append(java.lang.String.format("%02d", iMonth))
-//                .append(StringUtils.leftPad(String.valueOf(month), 2, "0"))
                 .append("-").append(iYear));
     }
 
