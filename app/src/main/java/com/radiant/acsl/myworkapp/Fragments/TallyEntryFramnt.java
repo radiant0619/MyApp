@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -239,8 +241,15 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
                         Log.i("Main Count", String.valueOf(vch.size()));
                         boolean iFlag = PopulateDb.getInstance().addVoucher(dbTally, vchMain, vch);
                         if (iFlag) {
-                            Intent intent = new Intent(getActivity(), AccountHome.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(getActivity(), AccountHome.class);
+//                            startActivity(intent);
+//                            Fragment fragment = new TallyHomeFramnt();
+//                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                            fragmentTransaction.replace(R.id.frame, fragment);
+//                            fragmentTransaction.addToBackStack(null);
+//                            fragmentTransaction.commit();
+
                         }
                     } else {
                         Toast.makeText(getActivity(), "Pleae Add GLs", Toast.LENGTH_SHORT).show();

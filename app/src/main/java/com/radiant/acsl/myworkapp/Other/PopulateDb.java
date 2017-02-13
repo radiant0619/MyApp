@@ -134,8 +134,8 @@ public class PopulateDb {
 
     public static boolean Delete(TallyDb db, String table, String column, String value) {
         SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
-//        sqLiteDatabase.delete(table, column + "=?", new String[]{value});
-        sqLiteDatabase.execSQL("DELETE FROM "+ table);
+        sqLiteDatabase.delete(table, column + "=?", new String[]{value});
+//        sqLiteDatabase.execSQL("DELETE FROM "+ table);
 
         return true;
     }

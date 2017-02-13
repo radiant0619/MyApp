@@ -124,6 +124,7 @@ public class TallyLedgerFramnt extends Fragment {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i(" ID ",String.valueOf(ledgerEdit.getId()));
                 PopulateDb.getInstance().Delete(tallyDb, TBL_LEDGER, FLD_ID, String.valueOf(ledgerEdit.getId()));
                 ResetControls();
 

@@ -169,7 +169,7 @@ public class TallyHome extends AppCompatActivity
         fab.setVisibility(View.VISIBLE);
         switch (navItemIndex) {
             case 0:
-                fab.setImageResource(R.drawable.ic_menu_manage);
+                fab.setImageResource(R.drawable.ic_menu_send);
                 break;
             case 1:
                 fab.setVisibility(View.INVISIBLE);
