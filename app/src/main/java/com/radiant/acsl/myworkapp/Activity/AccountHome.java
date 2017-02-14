@@ -58,7 +58,7 @@ public class AccountHome extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tallyDb = TallyDb.getInstance(this);
-        listView = (ListView) findViewById(R.id.listManager);
+        listView = (ListView) findViewById(R.id.listVouchers);
         voucherMains = dbAdapter.getInstance().getVoucherList(tallyDb);
 
 

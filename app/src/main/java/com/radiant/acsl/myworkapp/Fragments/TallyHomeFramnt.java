@@ -42,11 +42,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-
-import static com.radiant.acsl.myworkapp.Other.TallyDb.FLD_ID;
-import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_LEDGER;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,10 +50,10 @@ import static com.radiant.acsl.myworkapp.Other.TallyDb.TBL_LEDGER;
 public class TallyHomeFramnt extends Fragment {
 
 
-    private ListView listView;
+    private ListView listViewVch;
     private VoucherListAdapter arrayAdapter;
-    private VouchersAdapter<VoucherMain> arrayAdapter1;
-    private ArrayList<VoucherMain> voucherMains;
+    private VouchersAdapter<VoucherMain> mainVouchersAdapter;
+    private ArrayList<VoucherMain> voucherMainArrayList;
     private ArrayList<Voucher> voucherArrayList;
     private TallyDb tallyDb;
     private DbAdapter dbAdapter;
@@ -75,34 +71,36 @@ public class TallyHomeFramnt extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tally_home_framnt, container, false);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
         tallyDb = TallyDb.getInstance(getActivity());
-        listView = (ListView) view.findViewById(R.id.listManager);
-        voucherMains = dbAdapter.getInstance().getVoucherList(tallyDb);
-//        for (int i = 0; i <= voucherMains.size() - 1; i++) {
-//            VoucherMain main = (VoucherMain) voucherMains.get(i);
+        listViewVch = (ListView) view.findViewById(R.id.listVouchers);
+        voucherMainArrayList = dbAdapter.getInstance().getVoucherList(tallyDb);
+//        for (int i = 0; i <= voucherMainArrayList.size() - 1; i++) {
+//            VoucherMain main = (VoucherMain) voucherMainArrayList.get(i);
 //            main.setIsExported(false);
 //            PopulateDb.updateVoucherStatus(tallyDb, main);
 //        }
-        Log.i("Count of voucher", String.valueOf(voucherMains.size()));
-        arrayAdapter1 = new VouchersAdapter<VoucherMain>(getActivity(), voucherMains);
-        listView.setAdapter(arrayAdapter1);
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
+        Log.i("Count of voucher", String.valueOf(voucherMainArrayList.size()));
+        mainVouchersAdapter = new VouchersAdapter<VoucherMain>(getActivity(), voucherMainArrayList);
+        listViewVch.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listViewVch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-Log.i("Test","Test");
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Log.i("Item Click ", "Called");
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
                 // dialog.setContentView(R.layout.alert_list_radio);
 //                dialog.setTitle("List Title");
                 View customView = LayoutInflater.from(getActivity()).inflate(
                         R.layout.listview_alert, null, false);
-                ListView listView = (ListView) customView.findViewById(R.id.listview);
-                VoucherMain main1 = (VoucherMain) listView.getAdapter().getItem(i);
+                ListView listViewsub = (ListView) customView.findViewById(R.id.listview);
+                VoucherMain main1 = (VoucherMain) listViewVch.getAdapter().getItem(position);
                 ArrayList<Voucher> vouchers = DbAdapter.getInstance().getVoucher(tallyDb, main1.getId());
 
                 AlertListAdapter mAdapter = new AlertListAdapter(vouchers, getActivity());
-                listView.setAdapter(mAdapter);
-                listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+                listViewsub.setAdapter(mAdapter);
+                listViewsub.setChoiceMode(ListView.CHOICE_MODE_NONE);
                 dialog.setView(customView);
                 dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
@@ -110,12 +108,14 @@ Log.i("Test","Test");
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
 
+
                     }
                 });
                 dialog.show();
-                return false;
             }
         });
+        listViewVch.setAdapter(mainVouchersAdapter);
+
         TallyHome tallyHome = (TallyHome) getActivity();
         tallyHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +138,7 @@ Log.i("Test","Test");
 
     private void tallyXmlGenerate() {
         boolean iFlag = false;
-        ArrayList<VoucherMain> mainArrayList = arrayAdapter1.getCheckedItems();
+        ArrayList<VoucherMain> mainArrayList = mainVouchersAdapter.getCheckedItems();
         Log.i("Checked Items", "Selected Items count is " + mainArrayList.size());
 
         for (int i = 0; i <= mainArrayList.size() - 1; i++) {
@@ -317,7 +317,7 @@ Log.i("Test","Test");
                     PopulateDb.updateVoucherStatus(tallyDb, main);
                 }
                 Toast.makeText(getActivity(), "XML File Exported", Toast.LENGTH_LONG);
-                arrayAdapter1.notifyDataSetChanged();
+                mainVouchersAdapter.notifyDataSetChanged();
 
             }
         }

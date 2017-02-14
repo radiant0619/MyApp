@@ -21,6 +21,15 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog</item>
+    </style>
+
     <style name="CustomDialog">
         <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
     </style>

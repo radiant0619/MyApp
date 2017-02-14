@@ -13,11 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.radiant.acsl.myworkapp.Adapters.VouchersAdapter;
 import com.radiant.acsl.myworkapp.Modals.Ledger;
-import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 import com.radiant.acsl.myworkapp.Other.DbAdapter;
 import com.radiant.acsl.myworkapp.Other.PopulateDb;
 import com.radiant.acsl.myworkapp.Other.TallyDb;
@@ -51,7 +49,7 @@ public class TallyLedgerFramnt extends Fragment {
     private TallyDb tallyDb;
     private Ledger ledgerEdit;
 
-    private VouchersAdapter<Ledger> arrayAdapter1;
+    private VouchersAdapter<Ledger> ledgerVouchersAdapter;
     private ArrayList<Ledger> ledgerList;
     private DbAdapter dbAdapter;
 
@@ -153,8 +151,8 @@ public class TallyLedgerFramnt extends Fragment {
     private void LoadListView() {
 
         ledgerList = dbAdapter.getInstance().getLedgers(tallyDb);
-        arrayAdapter1 = new VouchersAdapter<Ledger>(getActivity(), ledgerList);
-        listView.setAdapter(arrayAdapter1);
+        ledgerVouchersAdapter = new VouchersAdapter<Ledger>(getActivity(), ledgerList);
+        listView.setAdapter(ledgerVouchersAdapter);
     }
 
     private void ResetControls() {

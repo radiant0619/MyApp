@@ -25,9 +25,9 @@ public class AlertListAdapter extends BaseAdapter {
     LayoutInflater inflater;
 
     public AlertListAdapter(ArrayList<Voucher> data, Context context) {
-        mData = data;
-        mContext = context;
-        inflater = LayoutInflater.from(context);
+        this.mData = data;
+        this.mContext = context;
+        this.inflater = LayoutInflater.from(this.mContext);
     }
 
     @Override
@@ -36,14 +36,13 @@ public class AlertListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int arg0) {
-        return null;
+    public Object getItem(int position) {
+        return mData.get(position);
     }
 
     @Override
-    public long getItemId(int arg0) {
-        // TODO Auto-generated method stub
-        return 0;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -51,12 +50,12 @@ public class AlertListAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.list_alert, null);
+            convertView = mInflater.inflate(R.layout.list_dlg_row, null);
         }
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.name);
-        TextView tvType = (TextView) convertView.findViewById(R.id.gender);
-        TextView tvAmount = (TextView) convertView.findViewById(R.id.age);
-        TextView tvRef = (TextView) convertView.findViewById(R.id.status);
+        TextView tvTitle = (TextView) convertView.findViewById(R.id.actname);
+        TextView tvType = (TextView) convertView.findViewById(R.id.actType);
+        TextView tvAmount = (TextView) convertView.findViewById(R.id.amount);
+        TextView tvRef = (TextView) convertView.findViewById(R.id.refer);
 
         tvTitle.setText(mData.get(position).getLedgerName());
         tvType.setText(mData.get(position).getIsCredit() == true ? "Cr" : "Dr");
