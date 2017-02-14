@@ -77,10 +77,10 @@ public class VouchersAdapter<T> extends BaseAdapter {
         if (getItem(position) instanceof VoucherMain) {
             VoucherMain voucher = (VoucherMain) getItem(position);
 //            txtId.setText(String.valueOf(voucher.getId()));
+//            txtEsported.setText(String.valueOf(voucher.getisExported()).toUpperCase());
             txtType.setText(voucher.getVoucherType());
             txtType.setPadding(20,0,0,0);
             txtDate.setText(String.valueOf(voucher.getPostDate()));
-//            txtEsported.setText(String.valueOf(voucher.getisExported()).toUpperCase());
             txtNarrate.setText(String.valueOf(voucher.getNarration()).toUpperCase());
             iFlag = voucher.getisExported();
             chkBox.setEnabled(!iFlag);

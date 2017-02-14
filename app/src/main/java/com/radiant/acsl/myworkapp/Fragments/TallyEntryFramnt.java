@@ -233,6 +233,7 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
                             voucher.setLedgerName(((Spinner) tf1.getChildAt(0)).getSelectedItem().toString());
                             voucher.setCredit(((Switch) tf1.getChildAt(1)).isChecked());
                             voucher.setDblAmount(Double.parseDouble(((EditText) tf1.getChildAt(2)).getText().toString()));
+                            voucher.setRef(((EditText) tf1.getChildAt(3)).getText().toString());
                             vch.add(voucher);
 //                            Log.i("msg ", ((Spinner) tf1.getChildAt(0)).getSelectedItem().toString());
 //                            Log.i("msg ", String.valueOf(((Switch) tf1.getChildAt(1)).isChecked()));

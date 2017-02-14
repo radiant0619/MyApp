@@ -141,22 +141,22 @@ public class TallyHomeFramnt extends Fragment {
         ArrayList<VoucherMain> mainArrayList = mainVouchersAdapter.getCheckedItems();
         Log.i("Checked Items", "Selected Items count is " + mainArrayList.size());
 
-        for (int i = 0; i <= mainArrayList.size() - 1; i++) {
-            VoucherMain main = (VoucherMain) mainArrayList.get(i);
-            Log.i("Vch Main", "ID: " + String.valueOf(main.getId())
-                    + " ; Type: " + String.valueOf(main.getVoucherType())
-                    + " ; Date: " + String.valueOf(main.getPostDate())
-                    + " ; IsExport: " + String.valueOf((boolean) main.getisExported()));
-
-            ArrayList<Voucher> vouchers = DbAdapter.getInstance().getVoucher(tallyDb, main.getId());
-            for (Voucher vch : vouchers) {
-                Log.i("Vch Sub", "ID:" + String.valueOf(main.getId())
-                        + " ; Ledger: " + String.valueOf(vch.getLedgerName())
-                        + " ; Amount: " + String.valueOf(vch.getDblAmount())
-                        + " ; IsCredit: " + String.valueOf((boolean) vch.getIsCredit()));
-
-            }
-        }
+//        for (int i = 0; i <= mainArrayList.size() - 1; i++) {
+//            VoucherMain main = (VoucherMain) mainArrayList.get(i);
+//            Log.i("Vch Main", "ID: " + String.valueOf(main.getId())
+//                    + " ; Type: " + String.valueOf(main.getVoucherType())
+//                    + " ; Date: " + String.valueOf(main.getPostDate())
+//                    + " ; IsExport: " + String.valueOf((boolean) main.getisExported()));
+//
+//            ArrayList<Voucher> vouchers = DbAdapter.getInstance().getVoucher(tallyDb, main.getId());
+//            for (Voucher vch : vouchers) {
+//                Log.i("Vch Sub", "ID:" + String.valueOf(main.getId())
+//                        + " ; Ledger: " + String.valueOf(vch.getLedgerName())
+//                        + " ; Amount: " + String.valueOf(vch.getDblAmount())
+//                        + " ; IsCredit: " + String.valueOf((boolean) vch.getIsCredit()));
+//
+//            }
+//        }
 
         XmlSerializer serializer = Xml.newSerializer();
         FileOutputStream fos = null;
