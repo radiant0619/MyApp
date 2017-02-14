@@ -1,6 +1,8 @@
 package com.radiant.acsl.myworkapp.Adapters;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
@@ -55,25 +57,30 @@ public class VouchersAdapter<T> extends BaseAdapter {
         return position;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public View getView(int position, View convertedView, ViewGroup viewGroup) {
 //        Log.i("Loop Sl ", String.valueOf(position));
         if (convertedView == null) {
             convertedView = inflater.inflate(R.layout.list_multipletext, null);
         }
-        TextView txtId = (TextView) convertedView.findViewById(R.id.slId);
+//        TextView txtId = (TextView) convertedView.findViewById(R.id.slId);
+        //        TextView txtEsported = (TextView) convertedView.findViewById(R.id.isExport);
+
         TextView txtType = (TextView) convertedView.findViewById(R.id.Type);
         TextView txtDate = (TextView) convertedView.findViewById(R.id.PostDate);
-        TextView txtEsported = (TextView) convertedView.findViewById(R.id.isExport);
+
         TextView txtNarrate = (TextView) convertedView.findViewById(R.id.narration);
         CheckBox chkBox = (CheckBox) convertedView.findViewById(R.id.chkSelect);
         boolean iFlag = false;
+//        txtId.setVisibility(View.GONE);
         if (getItem(position) instanceof VoucherMain) {
             VoucherMain voucher = (VoucherMain) getItem(position);
-            txtId.setText(String.valueOf(voucher.getId()));
+//            txtId.setText(String.valueOf(voucher.getId()));
             txtType.setText(voucher.getVoucherType());
+            txtType.setPadding(20,0,0,0);
             txtDate.setText(String.valueOf(voucher.getPostDate()));
-            txtEsported.setText(String.valueOf(voucher.getisExported()).toUpperCase());
+//            txtEsported.setText(String.valueOf(voucher.getisExported()).toUpperCase());
             txtNarrate.setText(String.valueOf(voucher.getNarration()).toUpperCase());
             iFlag = voucher.getisExported();
             chkBox.setEnabled(!iFlag);
@@ -88,13 +95,14 @@ public class VouchersAdapter<T> extends BaseAdapter {
         }
         if (getItem(position) instanceof Ledger) {
             chkBox.setVisibility(View.GONE);
-            txtId.setVisibility(View.GONE);
-            txtDate.setVisibility(View.GONE);
+//            txtId.setVisibility(View.GONE);
 
             Ledger ledger = (Ledger) getItem(position);
-            txtId.setText(String.valueOf(ledger.getId()));
+//            txtId.setText(String.valueOf(ledger.getId()));
             txtType.setText(ledger.getAcctName());
-            txtEsported.setText(String.valueOf(ledger.getIsBankCash() == 0 ? false : true).toUpperCase());
+            txtDate.setText(String.valueOf(ledger.getIsBankCash() == 0 ? false : true).toUpperCase());
+            txtDate.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            txtDate.setTextSize(8);
             txtNarrate.setText(String.valueOf(ledger.getIsBillWise() == 0 ? false : true).toUpperCase());
 
             txtType.setWidth(460);

@@ -45,16 +45,16 @@ public class VoucherListAdapter extends ArrayAdapter<VoucherMain> {
 //        convertedView = inflater.inflate(R.layout.list_multipletext, parent);
 
         CheckBox chkBodx = (CheckBox) convertedView.findViewById(R.id.chkSelect);
-        TextView txtId = (TextView) convertedView.findViewById(R.id.slId);
+//        TextView txtId = (TextView) convertedView.findViewById(R.id.slId);
         TextView txtType = (TextView) convertedView.findViewById(R.id.Type);
         TextView txtDate = (TextView) convertedView.findViewById(R.id.PostDate);
-        TextView txtEsported = (TextView) convertedView.findViewById(R.id.isExport);
+//        TextView txtEsported = (TextView) convertedView.findViewById(R.id.isExport);
 
 
-        txtId.setText(String.valueOf(voucher.getId()));
+//        txtId.setText(String.valueOf(voucher.getId()));
         txtType.setText(voucher.getVoucherType());
         txtDate.setText(String.valueOf(voucher.getPostDate()));
-        txtEsported.setText(String.valueOf(voucher.getisExported()));
+//        txtEsported.setText(String.valueOf(voucher.getisExported()));
 //        Log.i("Value in List", voucher.getLedgerName());
         return convertedView;
 

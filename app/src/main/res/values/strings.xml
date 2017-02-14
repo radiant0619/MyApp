@@ -75,6 +75,6 @@
         <item>21</item>
         <item>22</item>
     </string-array>
-    <string name="title_activity_tally_home">TallyHome</string>
+    <string name="title_activity_tally_home">My Tally</string>
 
 </resources>

@@ -30,6 +30,7 @@ public class TallyHome extends AppCompatActivity
     public FloatingActionButton fab;
 
     public static int navItemIndex = 0;
+    private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
     @Override
@@ -68,9 +69,15 @@ public class TallyHome extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        if (shouldLoadHomeFragOnBackPress) {
+            if (navItemIndex != 0) {
+                navItemIndex = 0;
+                loadFragment();
+                return;
+            }
+        }
+        super.onBackPressed();
     }
 
     @Override

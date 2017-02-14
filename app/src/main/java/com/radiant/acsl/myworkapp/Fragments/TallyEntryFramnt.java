@@ -241,15 +241,11 @@ public class TallyEntryFramnt extends Fragment implements View.OnClickListener {
                         Log.i("Main Count", String.valueOf(vch.size()));
                         boolean iFlag = PopulateDb.getInstance().addVoucher(dbTally, vchMain, vch);
                         if (iFlag) {
-//                            Intent intent = new Intent(getActivity(), AccountHome.class);
-//                            startActivity(intent);
-//                            Fragment fragment = new TallyHomeFramnt();
-//                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                            fragmentTransaction.replace(R.id.frame, fragment);
-//                            fragmentTransaction.addToBackStack(null);
-//                            fragmentTransaction.commit();
-
+                            if (tblLayout.getChildCount() > 1) {
+                                tblLayout.removeViews(1, tblLayout.getChildCount() - 1);
+                            }
+                            edtNarrate.setText("");
+                            getActivity().onBackPressed();
                         }
                     } else {
                         Toast.makeText(getActivity(), "Pleae Add GLs", Toast.LENGTH_SHORT).show();

@@ -16,9 +16,14 @@
             android:layout_weight="2.75"
             android:gravity="left"
             android:padding="5dp"
+            android:shadowColor="@android:color/holo_blue_light"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="8"
             android:text="Account Name"
-            android:textStyle="bold"
-            android:textColor="#ffffff" />
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -32,9 +37,13 @@
             android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="8"
             android:text="Amount"
-            android:textStyle="bold"
-            android:textColor="#ffffff" />
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -42,9 +51,13 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="8"
             android:text="Ref"
-            android:textStyle="bold"
-            android:textColor="#ffffff" />
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView
