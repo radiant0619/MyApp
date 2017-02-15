@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -29,12 +30,14 @@ import com.radiant.acsl.myworkapp.Modals.Voucher;
 import com.radiant.acsl.myworkapp.Modals.VoucherMain;
 import com.radiant.acsl.myworkapp.Other.Constants;
 import com.radiant.acsl.myworkapp.Other.DbAdapter;
+import com.radiant.acsl.myworkapp.Other.MailSender;
 import com.radiant.acsl.myworkapp.Other.PopulateDb;
 import com.radiant.acsl.myworkapp.Other.TallyDb;
 import com.radiant.acsl.myworkapp.R;
 
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -121,6 +124,7 @@ public class TallyHomeFramnt extends Fragment {
             @Override
             public void onClick(View view) {
                 tallyXmlGenerate();
+//                mailSend();
             }
         });
 //        btnDelete = (Button) view.findViewById((R.id.btnDelete));
@@ -304,13 +308,16 @@ public class TallyHomeFramnt extends Fragment {
 //                    FileOutputStream fos=getApplicationContext().openFileOutput("test.xml", Context.MODE_PRIVATE);
 //                        Log.i("String Writer", writer.toString());
                 fos.write(writer.toString().getBytes());
+
                 fos.close();
 
+                mailSend(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + fDate + ".xml");
                 iFlag = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
             if (iFlag) {
+
                 for (int i = 0; i <= mainArrayList.size() - 1; i++) {
                     VoucherMain main = (VoucherMain) mainArrayList.get(i);
                     main.setIsExported(true);
@@ -362,6 +369,47 @@ public class TallyHomeFramnt extends Fragment {
 
         return strings;
 
+
+    }
+
+
+    private void mailSend(final String vpath) {
+        Log.i("Mail", "called");
+        new AsyncTask<String, Integer, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(String... strings) {
+                MailSender m = new MailSender("rsv.radiant@gmail.com", "gzixueiaajdeeunz");
+                Log.i("Mail", "inprocess");
+                String[] toArr = {"rsv.radiant0619@gmail.com"};
+                m.set_to(toArr);
+                m.set_from("rsv.radiant@gmail.com");
+                m.set_subject("Tally Entries XML");
+                m.set_body("Enclosed the XML containing the Tally Vouchers to be posted in Tally");
+
+                try {
+                    m.addAttachment(vpath);
+
+                    if (m.send()) {
+//                        Toast.makeText(getActivity(), "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                        Log.i("Mail", "Ok");
+                        File file = new File(vpath);
+                        file.delete();
+                        return true;
+                    } else {
+//                        Toast.makeText(getActivity(), "Email was not sent.", Toast.LENGTH_LONG).show();
+                        Log.i("Mail", "Cancel");
+                        return false;
+                    }
+                } catch (Exception e) {
+                    //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
+                    Log.e("MailApp", "Could not send email", e);
+                    e.printStackTrace();
+
+                }
+                return false;
+            }
+        }.execute();
 
     }
 

@@ -44,7 +44,7 @@ public class MailSender extends Authenticator {
     private Multipart _multipart;
 
     public MailSender() {
-        _host = "gmail.com"; // default smtp server
+        _host = "smtp.gmail.com"; // default smtp server
         _port = "465"; // default smtp port
         _sport = "465"; // default socketfactory port
 
@@ -54,7 +54,7 @@ public class MailSender extends Authenticator {
         _subject = ""; // email subject
         _body = ""; // email body
 
-        _debuggable = true; // debug mode on or off - default off
+        _debuggable = false; // debug mode on or off - default off
         _auth = true; // smtp authentication - default on
 
         _multipart = new MimeMultipart();
@@ -78,7 +78,9 @@ public class MailSender extends Authenticator {
     public boolean send() throws Exception {
         Properties props = _setProperties();
 
-        if (!_user.equals("") && !_pass.equals("") && _to.length > 0 && !_from.equals("") && !_subject.equals("") && !_body.equals("")) {
+        if (!_user.equals("") && !_pass.equals("") && _to.length > 0
+                && !_from.equals("") && !_subject.equals("")
+                && !_body.equals("")) {
             Session session = Session.getInstance(props, this);
 
             MimeMessage msg = new MimeMessage(session);
@@ -137,7 +139,6 @@ public class MailSender extends Authenticator {
         if (_auth) {
             props.put("mail.smtp.auth", "true");
         }
-        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.port", _port);
         props.put("mail.smtp.socketFactory.port", _sport);
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");

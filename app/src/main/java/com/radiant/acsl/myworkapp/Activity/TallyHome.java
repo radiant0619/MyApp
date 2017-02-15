@@ -193,4 +193,9 @@ public class TallyHome extends AppCompatActivity
                 .setAction("Action", null).show();
 
     }
+
+    public void displayMessage(String message) {
+        Snackbar.make(findViewById(R.id.fab), message, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
 }
